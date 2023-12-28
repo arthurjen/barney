@@ -10,6 +10,9 @@
   },
   "dependencies": {
     "@auth0/nextjs-auth0": "^3.5.0",
+    "@headlessui/react": "^1.7.17",
+    "@heroicons/react": "^2.0.18",
+    "discord.js": "^14.14.1",
     "next": "14.0.4",
     "react": "^18",
     "react-dom": "^18"
