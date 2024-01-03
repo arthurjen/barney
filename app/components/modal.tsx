@@ -1,46 +1,20 @@
 "use client";
+
 import { Dialog, Transition, Listbox } from "@headlessui/react";
 import { Fragment, useState } from "react";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
 import Select from "./select";
 
-export default function Modal() {
-  let [isOpen, setIsOpen] = useState(false);
-
-  function closeModal() {
-    setIsOpen(false);
-  }
-
-  function openModal() {
-    setIsOpen(true);
-  }
-
-  const people = [
-    { id: "123451", name: "Arthur Jen" },
-    { id: "123452", name: "Devon Straub" },
-    { id: "123453", name: "Jackson Knorr" },
-    { id: "123454", name: "Scott Montgomery" },
-    { id: "123455", name: "Sean Collins" },
-    { id: "123456", name: "Tom Huteson" },
-  ];
-
-  const peopleData: SelectItem[] = people.map(({ id, name }) => ({
-    value: id,
-    display: name,
-  }));
+export function Modal(props: {
+  isOpen: boolean;
+  closeModal: () => void;
+  title: string;
+  children: any;
+}) {
+  const { isOpen, closeModal, title, children } = props;
 
   return (
     <>
-      <div className="inset-0 flex items-center justify-center">
-        <button
-          type="button"
-          onClick={openModal}
-          className="rounded-md bg-black/20 px-4 py-2 text-sm font-medium text-white hover:bg-black/30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75"
-        >
-          Borrow
-        </button>
-      </div>
-
       <Transition appear show={isOpen} as={Fragment}>
         <Dialog as="div" className="relative z-10" onClose={closeModal}>
           <Transition.Child
@@ -69,21 +43,26 @@ export default function Modal() {
                 <Dialog.Panel className="w-full h-96 max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
                   <Dialog.Title
                     as="h3"
-                    className="text-lg font-medium leading-6 text-gray-900"
+                    className="text-lg font-medium leading-6 text-gray-900 border-b py-2"
                   >
-                    Borrow Cards
+                    {title}
                   </Dialog.Title>
-                  <div className="mt-2">
-                    <Select label="Owner" data={peopleData} />
-                  </div>
+                  <div className="mt-2">{children}</div>
 
-                  <div className="mt-4">
+                  <div className="mt-4 border-t py-2">
                     <button
                       type="button"
-                      className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                      className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 mr-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
                       onClick={closeModal}
                     >
                       Submit
+                    </button>
+                    <button
+                      type="button"
+                      className="inline-flex justify-center rounded-md border border-transparent bg-gray-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                      onClick={closeModal}
+                    >
+                      Cancel
                     </button>
                   </div>
                 </Dialog.Panel>

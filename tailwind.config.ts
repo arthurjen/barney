@@ -18,7 +18,9 @@ const config: Config = {
     },
     extend: {
       colors: {
-        main: "#F4C146",
+        main: "#FDBE14", // yellow
+        secondary: "#7F14B1", // purple
+        tertiary: "#D32037" // red
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",

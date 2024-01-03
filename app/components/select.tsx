@@ -2,12 +2,12 @@ import { Fragment, useState } from "react";
 import { Listbox, Transition } from "@headlessui/react";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
 
-export default function Select(props: { label: string, data: SelectItem[] }) {
-  const { data, label } = props;
+export function Select(props: { label?: string, data: SelectItem[], className?: string, value: any }) {
+  const { data, label, className, value } = props;
   const [selected, setSelected] = useState(data[0]);
 
   return (
-    <div className="top-16 w-72">
+    <div className={`top-16 w-full ${className}`}>
       {label && <div>{label}</div>}
       <Listbox value={selected} onChange={setSelected}>
         <div className="relative mt-1">
@@ -28,7 +28,7 @@ export default function Select(props: { label: string, data: SelectItem[] }) {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <Listbox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm">
+            <Listbox.Options className="absolute mt-1 z-500 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm">
               {data.map((item, index) => (
                 <Listbox.Option
                   key={index}

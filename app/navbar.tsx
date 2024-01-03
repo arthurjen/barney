@@ -1,10 +1,8 @@
 "use client";
 
 import { Fragment } from "react";
-// import { usePathname } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-// import { ArchiveBoxIcon, UsersIcon, UserIcon } from "@heroicons/react/24/solid";
 import { Disclosure, Menu, Transition, Tab } from "@headlessui/react";
 import {
   ChevronDownIcon,
@@ -21,10 +19,11 @@ const navigation = [
   { title: "People", path: "/people" },
   { title: "Profile", path: "/profile" },
 ];
+
 export default function Navbar() {
   // const pathname = usePathname();
   return (
-    <div className="top-0 w-full px-5 md:px-10 2xl:px-16 bg-main border-b dark:bg-gray-900 dark:border-gray-700 z-20">
+    <div className="top-0 w-full px-5 md:px-10 2xl:px-16 bg-gray-400 border-b dark:bg-gray-900 dark:border-gray-700 z-20">
       <nav className="relative flex flex-wrap items-center justify-between px-6 py-6 mx-auto lg:justify-between">
         {/* Logo  */}
         <Disclosure>
@@ -35,7 +34,12 @@ export default function Navbar() {
                   className="flex items-center space-x-2 text-l font-medium text-indigo-900 dark:text-gray-100"
                   href="#"
                 >
-                  Cherry City Gaming
+                  <Image
+                    src="logo.svg"
+                    alt="Cherry City Games Logo"
+                    width={30}
+                    height={30}
+                  />
                 </Link>
 
                 <Disclosure.Button
