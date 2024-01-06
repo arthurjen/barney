@@ -10,4 +10,10 @@ declare global {
     quantity: number;
     name: string;
   }
+
+  interface Person {
+    name: string,
+    credits: number,
+    date: number
+  }
 }

@@ -4,6 +4,7 @@ import "./globals.css";
 // import { UserProvider } from "@auth0/nextjs-auth0/client";
 // import { withPageAuthRequired, AppRouterPageRoute } from "@auth0/nextjs-auth0";
 import Nav from "./nav";
+import Header from "./header";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,12 +23,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-        {/* <UserProvider> */}
-        <body className={inter.className}>
-          <Nav />
-          {children}
-          </body>
-        {/* </UserProvider> */}
+      {/* <UserProvider> */}
+      <body className={`overflow-hidden ${inter.className}`}>
+        <Header />
+        {children}
+        <Nav />
+      </body>
+      {/* </UserProvider> */}
     </html>
   );
 }

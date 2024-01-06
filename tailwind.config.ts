@@ -10,6 +10,9 @@ const config: Config = {
     container: {
       center: true,
     },
+    fontFamily: {
+      nuform: ["Nuform", "sans-serif"],
+    },
     screens: {
       sm: "480px",
       md: "768px",

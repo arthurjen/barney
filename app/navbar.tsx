@@ -6,9 +6,12 @@ import Image from "next/image";
 import { Disclosure, Menu, Transition, Tab } from "@headlessui/react";
 import {
   ChevronDownIcon,
+  UserCircleIcon,
+  FaceSmileIcon,
   Bars3Icon,
   XMarkIcon,
 } from "@heroicons/react/24/solid";
+import { usePathname } from "next/navigation";
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
@@ -21,49 +24,20 @@ const navigation = [
 ];
 
 export default function Navbar() {
-  // const pathname = usePathname();
+  const pathname = usePathname();
+
   return (
-    <div className="top-0 w-full px-5 md:px-10 2xl:px-16 bg-gray-400 border-b dark:bg-gray-900 dark:border-gray-700 z-20">
+    <div className="absolute bottom-0 w-full px-5 md:px-10 2xl:px-16 bg-secondary z-20 border-top">
       <nav className="relative flex flex-wrap items-center justify-between px-6 py-6 mx-auto lg:justify-between">
-        {/* Logo  */}
-        <Disclosure>
-          {({ open }) => (
-            <>
-              <div className="flex flex-wrap items-center justify-between w-full lg:w-auto">
-                <Link
-                  className="flex items-center space-x-2 text-l font-medium text-indigo-900 dark:text-gray-100"
-                  href="#"
-                >
-                  <Image
-                    src="logo.svg"
-                    alt="Cherry City Games Logo"
-                    width={30}
-                    height={30}
-                  />
-                </Link>
-
-                <Disclosure.Button
-                  aria-label="Toggle Menu"
-                  className="px-2 py-1 ml-auto text-gray-700 rounded-md lg:hidden hover:text-indigo-900 focus:text-indigo-900 focus:bg-indigo-50 focus:outline-none "
-                >
-                  {!open && <Bars3Icon className="w-6 h-6" />}
-                  {open && <XMarkIcon className="w-6 h-6" />}
-                </Disclosure.Button>
-
-                <Disclosure.Panel className="flex flex-col w-full absolute top-16 left-0 bg-white p-4 dark:bg-gray-900 border-blue-300 rounded dark:border-gray-700 my-5 z-999 lg:hidden">
-                  <NavMenu navigation={navigation} mobile={true} />
-                </Disclosure.Panel>
-              </div>
-            </>
-          )}
-        </Disclosure>
-
-        {/* menu  */}
-        <div className="hidden text-center lg:flex lg:items-center">
-          <ul className="items-center justify-end flex-1 pt-6 lg:pt-0 list-reset lg:flex">
-            <NavMenu navigation={navigation} />
-          </ul>
-        </div>
+        <Link href="/">
+          <Image src={pathname === '/' ? 'cards-solid.svg' : 'cards-outline.svg'} alt="cards" width={56} height={56} />
+        </Link>
+        <Link href="/profile">
+          <Image src="placeholder.svg" alt="profile" width={56} height={56} />
+        </Link>
+        <Link href="/people">
+          <Image src={pathname === '/people' ? 'people-solid.svg' : 'people-outline.svg'} alt="people" width={56} height={56} />
+        </Link>
       </nav>
     </div>
   );

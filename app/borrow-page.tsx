@@ -1,6 +1,10 @@
 "use client";
 
-import { XMarkIcon } from "@heroicons/react/20/solid";
+import {
+  XMarkIcon,
+  ChevronDownIcon,
+  ChevronUpIcon,
+} from "@heroicons/react/24/solid";
 import { Modal, Select, Input, Button } from "./components";
 
 import { useState } from "react";
@@ -11,7 +15,7 @@ const defaultCard: CardItem = {
 export default function BorrowPage() {
   let [isOpen, setIsOpen] = useState(false);
   let [cards, setCards] = useState([defaultCard]);
-  let [owner, setOwner] = useState('');
+  let [owner, setOwner] = useState("");
   function addCard() {
     setCards([...cards, defaultCard]);
   }
@@ -49,31 +53,43 @@ export default function BorrowPage() {
   }));
 
   return (
-    <div>
-      {/* Display of borrowed cards */}
-      {/* Borrow button */}
-      <div className="inset-0 flex items-center justify-center">
-        <button
-          type="button"
-          onClick={openModal}
-          className="rounded-md bg-black/20 px-4 py-2 text-sm font-medium text-white hover:bg-black/30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75"
-        >
-          Borrow
-        </button>
+    <div className="h-screen w-screen">
+      <div className="flex justify-center flex-col px-8">
+        <div className="pb-2 border-b-4 border-main flex justify-between items-center w-full mb-8">
+          <div className="text-main text-3xl">cards borrowed</div>
+          <ChevronDownIcon className="fill-main" width={24} height={24} />
+        </div>
+        <div className="pb-2 border-b-4 border-main flex justify-between items-center w-full mb-8">
+          <div className="text-main text-3xl">cards lent</div>
+          <ChevronDownIcon className="fill-main" width={24} height={24} />
+        </div>
       </div>
+      <div className="px-8 w-full absolute bottom-32">
+        <Button
+          onClick={openModal}
+          className="bg-main h-16 w-full font-regular text-3xl text-secondary hover:bg-black/30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75"
+        >
+          borrow
+        </Button>
+      </div>
+
       <Modal isOpen={isOpen} closeModal={closeModal} title="Borrow Cards">
         <form>
           <Select data={peopleData} label="Owner" value={owner} />
           {cards.map((card, index) => (
             <div key={index} className="flex space-between my-2 w-full mx-0">
-              <Select data={numbers} className="w-20 mr-2" value={card.quantity} />
+              <Select
+                data={numbers}
+                className="w-16 mr-2"
+                value={card.quantity}
+              />
               <Input value={card.name} />
-              <Button icon={<XMarkIcon />} />
+              <Button>
+                <XMarkIcon />
+              </Button>
             </div>
           ))}
-          <div>
-            Add Card
-          </div>
+          <div>Add Card</div>
         </form>
       </Modal>
     </div>
