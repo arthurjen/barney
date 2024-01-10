@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-// import { UserProvider } from "@auth0/nextjs-auth0/client";
-// import { withPageAuthRequired, AppRouterPageRoute } from "@auth0/nextjs-auth0";
 import Nav from "./nav";
-import Header from "./header";
+import Header from "@/components/header";
+import SignInPage from "./signin";
+import { auth } from "auth";
+import { SessionProvider } from "next-auth/react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,21 +17,26 @@ export const metadata: Metadata = {
   description: "Magic: the Gathering Card Lending app by Cherry City Gaming",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const session = await auth();
+
   return (
     <html lang="en">
-      {/* <UserProvider> */}
       <body className={`overflow-hidden ${inter.className}`}>
-        <Header />
-        {children}
-        <Nav />
+        {session?.user ? (
+          <SessionProvider session={session}>
+            <Header />
+            {children}
+            <Nav />
+          </SessionProvider>
+        ) : (
+          <SignInPage />
+        )}
       </body>
-      {/* </UserProvider> */}
     </html>
   );
 }
-// export default withPageAuthRequired(RootLayout, { returnTo: "/" });

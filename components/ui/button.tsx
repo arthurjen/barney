@@ -6,7 +6,7 @@ export function Button(props: {
   const { children, onClick, className } = props;
   return (
     <button
-      onClick={onClick}
+      // onClick={onClick}
       className={`${className}`}
     >
       {children}

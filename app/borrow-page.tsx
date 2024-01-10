@@ -5,7 +5,7 @@ import {
   ChevronDownIcon,
   ChevronUpIcon,
 } from "@heroicons/react/24/solid";
-import { Modal, Select, Input, Button } from "./components";
+import { Modal, Select, Input, Button } from "../components/ui";
 
 import { useState } from "react";
 const defaultCard: CardItem = {
