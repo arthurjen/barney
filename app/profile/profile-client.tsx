@@ -1,20 +1,26 @@
 "use client";
-import { useUser } from "@auth0/nextjs-auth0/client";
-import { Tab } from '@headlessui/react'
+import Image from "next/image";
+import { Button } from "@/components/ui";
 
-export default function ProfileClient() {
-  const { user, error, isLoading } = useUser();
-
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>{error.message}</div>;
-
+export default function ProfileClient({ ...props }) {
+  const { session } = props;
+  console.log(session.user);
   return (
-    user && (
-      <div>
-        <img src={user.picture} alt={user.name} />
-        <h2>{user.name}</h2>
-        <p>{user.email}</p>
+    <div className="w-full h-auto flex flex-col justify-between items-center text-main">
+      <Image
+        alt="profile pic"
+        className="rounded-full border-4 border-main"
+        src={session.user.image}
+        width={100}
+        height={100}
+      />
+      <div>{session.user.name}</div>
+      <div>est. jan 2024</div>
+      <div>44</div>
+      <div>credits</div>
+      <div className="px-8 w-full absolute bottom-32">
+        <Button className="self-end">edit profile</Button>
       </div>
-    )
+    </div>
   );
 }

@@ -1,6 +1,6 @@
 import { signIn, signOut } from "auth";
 import { Button } from "./ui/button";
-
+import { } from 'next-auth';
 export function SignIn({
   provider,
   ...props
@@ -9,7 +9,7 @@ export function SignIn({
     <form
       action={async () => {
         "use server";
-        await signIn(provider);
+        await signIn(provider, { redirectTo: '/'});
       }}
       className="w-full"
     >

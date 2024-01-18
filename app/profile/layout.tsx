@@ -3,5 +3,5 @@ export default function ProfileLayout({
 }: {
   children: React.ReactNode
 }) {
-  return <section>{children}</section>
+  return <div className="w-full h-full">{children}</div>
 }

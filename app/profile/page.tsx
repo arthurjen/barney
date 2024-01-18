@@ -1,9 +1,12 @@
 import { Metadata } from "next";
 import ProfileClient from './profile-client';
+import { auth } from "auth";
 
 export const metadata: Metadata = {
-  title: "Profile",
+  title: "profile",
 };
-export default function Profile() {
-  return <ProfileClient />;
+export default async function Profile() {
+  const session = await auth();
+
+  return <ProfileClient session={session} />;
 }

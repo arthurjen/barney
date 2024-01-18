@@ -1,7 +1,14 @@
+import { Header } from "@/components";
+
 export default function PeopleLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
-  return <section>{children}</section>
+  return (
+    <div className="w-full h-full">
+      <Header />
+      {children}
+    </div>
+  );
 }

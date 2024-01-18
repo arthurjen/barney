@@ -2,19 +2,15 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Nav from "./nav";
-import Header from "@/components/header";
-import SignInPage from "./signin";
-import { auth } from "auth";
-import { SessionProvider } from "next-auth/react";
-
+import { Navbar } from "@/components";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: {
-    template: "LX: %s",
-    default: "LX", // a default is required when creating a template
+    template: "barney: %s",
+    default: "barney", // a default is required when creating a template
   },
-  description: "Magic: the Gathering Card Lending app by Cherry City Gaming",
+  description: "a borrow & lending app",
 };
 
 export default async function RootLayout({
@@ -22,20 +18,14 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const session = await auth();
 
   return (
     <html lang="en">
       <body className={`overflow-hidden ${inter.className}`}>
-        {session?.user ? (
-          <SessionProvider session={session}>
-            <Header />
-            {children}
-            <Nav />
-          </SessionProvider>
-        ) : (
-          <SignInPage />
-        )}
+        <main className="flex min-h-screen flex-col items-center bg-secondary px-8 font-nuform">
+          {children}
+          <Navbar />
+        </main>
       </body>
     </html>
   );

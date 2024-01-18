@@ -1,5 +1,5 @@
-import Navbar from "@/components/navbar";
+import { Navbar } from "@/components";
 
-export default async function Nav() {
+export default function Nav() {
   return <Navbar />;
 }
