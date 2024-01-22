@@ -6,7 +6,7 @@ export function Button(props: {
   const { children, onClick, className } = props;
   return (
     <button
-      // onClick={onClick}
+      onClick={onClick}
       className={`bg-main h-16 w-full font-regular text-3xl text-secondary hover:bg-black/30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75 ${className}`}
     >
       {children}

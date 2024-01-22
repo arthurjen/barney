@@ -1,9 +1,7 @@
 "use client";
 
 import { Dialog, Transition, Listbox } from "@headlessui/react";
-import { Fragment, useState } from "react";
-import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
-import Select from "./select";
+import { Fragment } from "react";
 
 export function Modal(props: {
   isOpen: boolean;

@@ -84,7 +84,7 @@ export default function BorrowPage() {
                 value={card.quantity}
               />
               <Input value={card.name} />
-              <Button>
+              <Button onClick={() => console.log('X')}>
                 <XMarkIcon />
               </Button>
             </div>

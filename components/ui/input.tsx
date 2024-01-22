@@ -1,4 +1,4 @@
-export function Input(props: { label?: string }) {
+export function Input(props: { label?: string, value: string }) {
   const { label, value } = props;
 
   return (

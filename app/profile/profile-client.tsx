@@ -19,7 +19,7 @@ export default function ProfileClient({ ...props }) {
       <div>44</div>
       <div>credits</div>
       <div className="px-8 w-full absolute bottom-32">
-        <Button className="self-end">edit profile</Button>
+        <Button className="self-end" onClick={() => console.log('edit profile')}>edit profile</Button>
       </div>
     </div>
   );
