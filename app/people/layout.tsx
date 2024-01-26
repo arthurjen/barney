@@ -7,9 +7,7 @@ export default function PeopleLayout({
 }) {
   return (
     <div className="w-full h-full">
-      <Header />
       {children}
-      <Navbar />
     </div>
   );
 }

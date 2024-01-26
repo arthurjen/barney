@@ -19,10 +19,10 @@ export default async function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`overflow-hidden ${inter.className}`}>
+      <body className={inter.className}>
         <main className="flex min-h-screen flex-col items-center bg-secondary font-nuform">
           <Navbar />
-          {children}
+          <div className="px-8 w-full">{children}</div>
         </main>
       </body>
     </html>
