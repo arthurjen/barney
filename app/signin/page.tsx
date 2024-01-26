@@ -1,12 +1,10 @@
-"use client ";
 import Image from "next/image";
-import { Button } from "@/components/ui";
 import { SignIn } from "@/components/auth-components";
 
 export default function SignInPage() {
   return (
     <div>
-      <div className="h-full w-full flex flex-col items-center text-main mt-36">
+      <div className="h-full w-full flex flex-col items-center text-main mt-12">
         <Image
           src="logo.svg"
           alt="Cherry City Games Logo"
