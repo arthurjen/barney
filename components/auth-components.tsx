@@ -4,15 +4,14 @@ import { Button } from "./ui/button";
 export function SignIn({ provider, ...props }: { provider?: string }) {
   return (
     <form
-      // action={async () => {
-      //   "use server";
-      //   await signIn(provider, { redirectTo: "/" });
-      // }}
+      action={async () => {
+        "use server";
+        await signIn(provider, { redirectTo: "/borrow" });
+      }}
       className="w-full"
     >
       <Button
-        onClick={() => console.log("sign in")}
-        text="sign in"
+        text="continue with discord"
       />
     </form>
   );

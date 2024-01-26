@@ -3,5 +3,5 @@ export default function SigninLayout({
 }: {
   children: React.ReactNode
 }) {
-  return <section>{children}</section>
+  return <section className="w-full h-full">{children}</section>
 }

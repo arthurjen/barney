@@ -15,14 +15,13 @@ import { usePathname } from "next/navigation";
 export default function NavbarClient({ ...props }) {
   const { session } = props;
   const pathname = usePathname();
-  console.log(session);
 
   return (
     <div className="absolute bottom-0 w-full px-5 md:px-10 2xl:px-16 bg-secondary z-20 border-t-4 border-main">
       <nav className="relative flex flex-wrap items-center justify-between px-6 py-6 mx-auto lg:justify-between">
-        <Link href="/">
+        <Link href="/borrow">
           <Image
-            src={pathname === "/" ? "cards-solid.svg" : "cards-outline.svg"}
+            src={pathname === "/borrow" ? "cards-solid.svg" : "cards-outline.svg"}
             alt="cards"
             width={56}
             height={56}

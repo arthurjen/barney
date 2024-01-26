@@ -1,7 +1,5 @@
-export function Button(props: {
-  onClick: () => void;
-  text: string;
-}) {
+"use client";
+export function Button(props: { onClick?: () => void; text: string }) {
   const { onClick, text } = props;
   return (
     <button

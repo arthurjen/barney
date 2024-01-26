@@ -53,8 +53,8 @@ export default function BorrowPage() {
   }));
 
   return (
-    <div className="h-screen w-screen">
-      <div className="flex justify-center flex-col px-8">
+    <div className="h-auto w-full">
+      <div className="flex justify-center flex-col">
         <div className="pb-2 border-b-4 border-main flex justify-between items-center w-full mb-8">
           <div className="text-main text-3xl">cards borrowed</div>
           <ChevronDownIcon className="fill-main" width={24} height={24} />
@@ -64,7 +64,7 @@ export default function BorrowPage() {
           <ChevronDownIcon className="fill-main" width={24} height={24} />
         </div>
       </div>
-      <div className="px-8 w-full absolute bottom-32">
+      <div className="w-full ">
         <Button onClick={openModal} text="borrow"></Button>
       </div>
 

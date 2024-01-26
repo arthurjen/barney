@@ -1,4 +1,4 @@
-import { Header } from "@/components";
+import { Header, Navbar } from "@/components";
 
 export default function PeopleLayout({
   children,
@@ -9,6 +9,7 @@ export default function PeopleLayout({
     <div className="w-full h-full">
       <Header />
       {children}
+      <Navbar />
     </div>
   );
 }

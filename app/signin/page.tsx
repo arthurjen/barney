@@ -5,7 +5,7 @@ import { SignIn } from "@/components/auth-components";
 
 export default function SignInPage() {
   return (
-    <main className="min-h-screen flex flex-col justify-between bg-secondary p-8 font-nuform">
+    <main className="h-full w-full flex flex-col justify-between bg-secondary py-8">
       <div className="flex flex-col items-center w-full text-main mt-36">
         <Image
           src="logo.svg"

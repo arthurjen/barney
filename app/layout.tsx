@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Nav from "./nav";
 import { Navbar } from "@/components";
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,13 +17,12 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-
   return (
     <html lang="en">
       <body className={`overflow-hidden ${inter.className}`}>
-        <main className="flex min-h-screen flex-col items-center bg-secondary px-8 font-nuform">
-          {children}
+        <main className="flex min-h-screen flex-col items-center bg-secondary font-nuform">
           <Navbar />
+          {children}
         </main>
       </body>
     </html>
