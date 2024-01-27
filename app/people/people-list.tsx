@@ -8,8 +8,8 @@ const sortOptions = [
     value: "name",
   },
   {
-    display: "credits",
-    value: "credits",
+    display: "karma",
+    value: "karma",
   },
   // {
   //   display: "date est.",
@@ -20,68 +20,68 @@ const sortOptions = [
 const people: Person[] = [
   {
     name: "Tom Huteson",
-    credits: 44,
+    karma: 44,
     date: 1704579809561,
   },
   {
     name: "Arthur Jen",
-    credits: 23,
+    karma: 23,
     date: 1704519809561,
   },
   {
     name: "Ryan Ward",
-    credits: 59,
+    karma: 59,
     date: 1704579800561,
   },
   {
     name: "Sean Collins",
-    credits: 0,
+    karma: 0,
     date: 1704579800562,
   },
   {
     name: "Tom Huteson",
-    credits: 44,
+    karma: 44,
     date: 1704579809561,
   },
   {
     name: "Arthur Jen",
-    credits: 23,
+    karma: 23,
     date: 1704519809561,
   },
   {
     name: "Ryan Ward",
-    credits: 59,
+    karma: 59,
     date: 1704579800561,
   },
   {
     name: "Sean Collins",
-    credits: 0,
+    karma: 0,
     date: 1704579800562,
   },
   {
     name: "Tom Huteson",
-    credits: 44,
+    karma: 44,
     date: 1704579809561,
   },
   {
     name: "Arthur Jen",
-    credits: 23,
+    karma: 23,
     date: 1704519809561,
   },
   {
     name: "Ryan Ward",
-    credits: 59,
+    karma: 59,
     date: 1704579800561,
   },
   {
     name: "Sean Collins",
-    credits: 0,
+    karma: 0,
     date: 1704579800562,
   },
 ];
 
 export default function PeopleList() {
-  const [sortBy, setSortBy] = useState("credits");
+  const [sortBy, setSortBy] = useState("karma");
   const [asc, setAsc] = useState(false);
 
   function sort(list: Person[], sortBy: string, asc: boolean) {
@@ -107,7 +107,7 @@ export default function PeopleList() {
           return 0;
         });
       }
-    } else if (sortBy === "credits") {
+    } else if (sortBy === "karma") {
       if (asc) {
         return list.sort((a, b) => a[sortBy] - b[sortBy]);
       } else {
@@ -141,7 +141,7 @@ export default function PeopleList() {
         </div>
       </div>
       <div className="w-full h-full overflow-auto">
-        {sort(people, sortBy, asc).map(({ name, credits, date }, index) => (
+        {sort(people, sortBy, asc).map(({ name, karma, date }, index) => (
           <div
             key={index}
             className="w-full flex justify-between items-center border-main border-2 my-4 p-4 text-xl text-main"
@@ -156,7 +156,7 @@ export default function PeopleList() {
               <div className="ml-2">{name.toLowerCase()}</div>
             </div>
             <div className="border-2 border-main w-[36px] h-[36px] box-border rounded-full">
-              <div className="text-center align-top pt-[1px]">{credits}</div>
+              <div className="text-center align-top pt-[1px]">{karma}</div>
             </div>
           </div>
         ))}

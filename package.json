@@ -13,6 +13,7 @@
     "@heroicons/react": "^2.0.18",
     "clsx": "^2.1.0",
     "discord.js": "^14.14.1",
+    "firebase": "^10.7.2",
     "next": "14.0.4",
     "next-auth": "beta",
     "react": "^18",

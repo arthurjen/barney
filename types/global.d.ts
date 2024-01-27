@@ -13,7 +13,7 @@ declare global {
 
   interface Person {
     name: string,
-    credits: number,
+    karma: number,
     date: number
   }
 }

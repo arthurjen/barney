@@ -6,7 +6,7 @@ export default function ProfileLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="w-full h-full">
+    <div className="w-full h-full mt-12">
       {children}
     </div>
   );
