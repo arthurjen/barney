@@ -2,31 +2,29 @@
 import { Fragment } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import cx from "clsx";
+import { clsx } from "clsx";
 import { Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/solid";
+import { usePathname } from "next/navigation";
 
 const navigation = [
   { title: "borrow", path: "/borrow" },
   { title: "people", path: "/people" },
   { title: "profile", path: "/profile" },
+  { title: "log out", path: "/logout" },
 ];
 
-const options = [{ title: "sign out", path: "/signout" }];
-
 export function Navbar() {
+  const pathname = usePathname();
+
   return (
-    <div className="max-w-screen-xl w-full py-3 px-4 mx-auto shadow-lg">
+    <div className="z-21 absolute top-0 max-w-screen-xl w-full py-6 px-8 mx-auto">
       <nav className="w-full relative flex items-center justify-between mx-auto">
         <Logo />
-        <div className="w-full pl-10 pr-8 flex justify-between items-center text-main text-xl">
-          {navigation.map((route) => (
-            <Link href={route.path} key={route.path}>
-              {route.title}
-            </Link>
-          ))}
+        <div className="text-main text-2xl">
+          {pathname !== "/signin" && pathname.slice(1)}
         </div>
-        <MobileMenu />
+        <MobileMenu path={pathname} />
       </nav>
     </div>
   );
@@ -35,7 +33,7 @@ export function Navbar() {
 const Logo = () => {
   return (
     <Link href="/">
-      <Image src="logo.svg" alt="logo" width={36} height={36} />
+      <Image src="logo.svg" alt="logo" width={44} height={44} />
     </Link>
   );
 };
@@ -55,9 +53,18 @@ const Hamburger = ({ open }: { open: boolean }) => {
   );
 };
 
-const MobileMenu = () => {
+function NextLink(props: { href: string, children: any }) {
+  const { href, children, ...rest } = props;
   return (
-    <Menu as="div" className="relative text-right text-main">
+    <Link href={href} {...rest}>
+      {children}
+    </Link>
+  );
+}
+
+const MobileMenu = ({ path }: { path: string }) => {
+  return (
+    <Menu as="div" className="z-10 relative text-center text-main">
       {({ open }) => (
         <>
           <Hamburger open={open} />
@@ -71,16 +78,24 @@ const MobileMenu = () => {
             leaveTo="transform opacity-0 scale-95"
           >
             <Menu.Items
-              className={cx(
-                "z-20 w-36 px-8 origin-top-right rounded-md absolute right-0 focus:outline-none bg-secondary shadow-lg"
+              className={clsx(
+                "z-10 w-full h-full fixed top-24 left-0 focus:outline-none bg-secondary shadow-lg"
               )}
             >
-              <div className="py-3 text-xl">
-                {options.map((item, index) => (
-                  <Menu.Item as="div" key={index}>
-                    <Link href={item?.path ? item.path : "#"}>
-                      <span>{item.title}</span>
-                    </Link>
+              <div className="py-3 px-8">
+                {navigation.map((item, index) => (
+                  <Menu.Item
+                    as={NextLink}
+                    key={index}
+                    className={clsx(
+                      "h-20 my-8 flex justify-center items-center text-3xl",
+                      path === item.path
+                        ? "bg-main text-secondary"
+                        : "border-2 border-main text-main"
+                    )}
+                    href={item.path}
+                  >
+                    {item.title}
                   </Menu.Item>
                 ))}
               </div>
