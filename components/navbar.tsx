@@ -1,5 +1,5 @@
 "use client";
-import { Fragment } from "react";
+import React, { Fragment } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { clsx } from "clsx";
@@ -53,8 +53,15 @@ const Hamburger = ({ open }: { open: boolean }) => {
   );
 };
 
-function NextLink(props: { href: string, children: any }) {
-  const { href, children, ...rest } = props;
+function NextLink({
+  href,
+  children,
+  ...rest
+}: {
+  href: string;
+  children: React.ReactNode;
+  [rest: string]: any;
+}) {
   return (
     <Link href={href} {...rest}>
       {children}
