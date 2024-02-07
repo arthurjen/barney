@@ -1,7 +1,9 @@
 "use client";
 
-import { Dialog, Transition, Listbox } from "@headlessui/react";
+import { Dialog, Transition } from "@headlessui/react";
 import { Fragment } from "react";
+import { XMarkIcon } from "@heroicons/react/24/solid";
+import { IconButton } from "@/components/ui";
 
 export function Modal(props: {
   isOpen: boolean;
@@ -27,7 +29,7 @@ export function Modal(props: {
             <div className="fixed inset-0 bg-black/25" />
           </Transition.Child>
 
-          <div className="fixed inset-0 overflow-y-auto">
+          <div className="fixed inset-0 overflow-y-auto font-nuform">
             <div className="flex min-h-full items-center justify-center p-4 text-center">
               <Transition.Child
                 as={Fragment}
@@ -38,31 +40,17 @@ export function Modal(props: {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <Dialog.Panel className="w-full h-96 max-w-md transform overflow-hidden bg-secondary border-main border-4 p-6 text-left align-middle shadow-xl transition-all">
+                <Dialog.Panel className="w-full h-fit-content max-w-md transform overflow-hidden bg-secondary border-main border-4 p-6 text-left align-middle shadow-xl transition-all">
                   <Dialog.Title
                     as="h3"
-                    className="text-lg font-medium leading-6 text-gray-900 border-b py-2"
+                    className="text-3xl text-main border-b-4 border-main flex pb-4 justify-between"
                   >
                     {title}
+                    <IconButton onClick={closeModal}>
+                      <XMarkIcon height={36} width={36} />
+                    </IconButton>
                   </Dialog.Title>
                   <div className="mt-2">{children}</div>
-
-                  <div className="mt-4 border-t py-2">
-                    <button
-                      type="button"
-                      className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 mr-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                      onClick={closeModal}
-                    >
-                      Submit
-                    </button>
-                    <button
-                      type="button"
-                      className="inline-flex justify-center rounded-md border border-transparent bg-gray-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                      onClick={closeModal}
-                    >
-                      Cancel
-                    </button>
-                  </div>
                 </Dialog.Panel>
               </Transition.Child>
             </div>

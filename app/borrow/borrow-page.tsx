@@ -1,28 +1,38 @@
 "use client";
 
-import {
-  XMarkIcon,
-  ChevronDownIcon,
-  ChevronUpIcon,
-} from "@heroicons/react/24/solid";
-import { Modal, Select, Input, Button } from "@/components/ui";
-
+import { ChevronDownIcon, PlusIcon } from "@heroicons/react/24/solid";
+import { Modal, Select, Input, Button, IconButton } from "@/components/ui";
+import Card from "./card";
 import { useState } from "react";
+
 const defaultCard: CardItem = {
   quantity: 1,
   name: "",
 };
+
+const numbers: SelectItem[] = [0, 1, 2, 3, 4].map((n) => ({
+  value: n,
+}));
+
 export default function BorrowPage() {
   let [isOpen, setIsOpen] = useState(false);
-  let [cards, setCards] = useState([defaultCard]);
+  let [cards, setCards] = useState([{ ...defaultCard }]);
   let [owner, setOwner] = useState("");
+
   function addCard() {
-    setCards([...cards, defaultCard]);
+    setCards([...cards, { ...defaultCard }]);
   }
 
-  function removeCard(index: number) {
+  function setCardQuantity(index: number, quantity: number) {
     const toSet = [...cards];
-    toSet.splice(index, 1);
+    if (quantity === 0) toSet.splice(index, 1);
+    else toSet[index].quantity = quantity;
+    setCards(toSet);
+  }
+
+  function setCardName(index: number, name: string) {
+    const toSet = [...cards];
+    toSet[index].name = name;
     setCards(toSet);
   }
 
@@ -48,10 +58,6 @@ export default function BorrowPage() {
     display: name,
   }));
 
-  const numbers: SelectItem[] = [1, 2, 3, 4].map((n) => ({
-    value: n,
-  }));
-
   return (
     <div className="h-auto w-full">
       <div className="flex justify-center flex-col">
@@ -68,23 +74,42 @@ export default function BorrowPage() {
         <Button onClick={openModal} text="borrow"></Button>
       </div>
 
-      <Modal isOpen={isOpen} closeModal={closeModal} title="Borrow Cards">
+      <Modal isOpen={isOpen} closeModal={closeModal} title="borrow cards">
         <form>
-          <Select data={peopleData} label="Owner" value={owner} />
-          {cards.map((card, index) => (
-            <div key={index} className="flex space-between my-2 w-full mx-0">
-              <Select
-                data={numbers}
-                className="w-16 mr-2"
-                value={card.quantity}
-              />
-              <Input value={card.name} />
-              {/* <Button onClick={() => console.log("X")}>
-                <XMarkIcon />
-              </Button> */}
+          <Select
+            data={peopleData}
+            label="owner"
+            value={owner}
+            onSelect={setOwner}
+            placeholder="member"
+          />
+          <div className="pb-16 border-b-4 border-main mb-4">
+            {cards.map((card, index) => (
+              <div
+                key={index}
+                className="flex justify-between w-full mx-0 mt-2"
+              >
+                <Select
+                  type="number"
+                  data={numbers}
+                  className="mr-2 w-24"
+                  value={{ value: card.quantity }}
+                  onSelect={(e) => setCardQuantity(index, e.value)}
+                />
+                <Input
+                  value={card.name}
+                  onChange={(e) => setCardName(index, e.target.value)}
+                />
+              </div>
+            ))}
+            <div
+              className="border-2 border-main w-full h-12 text-main text-3xl flex justify-center items-center mt-2"
+              onClick={addCard}
+            >
+              <PlusIcon height={24} width={24} />
             </div>
-          ))}
-          <div>Add Card</div>
+          </div>
+          <Button text="submit" disabled={!cards.length} onClick={() => console.log("borrow")} />
         </form>
       </Modal>
     </div>
