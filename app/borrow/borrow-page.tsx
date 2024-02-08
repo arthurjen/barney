@@ -58,6 +58,8 @@ export default function BorrowPage() {
     display: name,
   }));
 
+  const submitDisabled = !cards.length || cards.some(card => !card.name)
+
   return (
     <div className="h-auto w-full">
       <div className="flex justify-center flex-col">
@@ -109,7 +111,7 @@ export default function BorrowPage() {
               <PlusIcon height={24} width={24} />
             </div>
           </div>
-          <Button text="submit" disabled={!cards.length} onClick={() => console.log("borrow")} />
+          <Button text="submit" disabled={submitDisabled} onClick={() => console.log("borrow")} />
         </form>
       </Modal>
     </div>

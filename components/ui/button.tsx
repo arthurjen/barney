@@ -12,7 +12,7 @@ export function Button({
     <button
       onClick={onClick}
       disabled={!!disabled}
-      className="bg-main h-20 w-full font-regular text-3xl text-secondary hover:bg-black/30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75"
+      className="bg-main h-20 w-full font-regular text-3xl text-secondary disabled:bg-tertiary hover:bg-black/30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75"
     >
       {text}
     </button>
