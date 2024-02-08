@@ -18,7 +18,7 @@ export function Navbar() {
   const pathname = usePathname();
 
   return (
-    <div className="z-21 absolute top-0 max-w-screen-xl w-full py-6 px-8 mx-auto">
+    <div className="z-500 fixed top-0 bg-secondary max-w-screen-xl w-full py-6 px-8 mx-auto">
       <nav className="w-full relative flex items-center justify-between mx-auto">
         <Logo />
         <div className="text-main text-2xl">
@@ -32,8 +32,8 @@ export function Navbar() {
 
 const Logo = () => {
   return (
-    <Link href="/">
-      <Image src="logo.svg" alt="logo" width={44} height={44} />
+    <Link href="/" className="relative h-12 w-12">
+      <Image src="logo.svg" alt="logo" fill priority/>
     </Link>
   );
 };

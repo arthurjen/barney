@@ -1,8 +1,20 @@
 "use client";
 import { SetStateAction, useState } from "react";
-export function Input({ label, value, onChange }: { label?: string; value: string, onChange: React.Dispatch<SetStateAction<any>> }) {
+export function Input({
+  label,
+  value,
+  onChange,
+  className,
+  name
+}: {
+  label?: string;
+  value: string;
+  onChange: React.Dispatch<SetStateAction<any>>;
+  className?: string;
+  name?: string;
+}) {
   return (
-    <div className="w-full">
+    <div className={`w-full ${className}`}>
       {/* {label && (
         <label className="block mb-2 text-sm text-gray-600 dark:text-gray-400">
           {label}
@@ -15,6 +27,7 @@ export function Input({ label, value, onChange }: { label?: string; value: strin
         value={value}
         onChange={onChange}
         className="w-full px-3 py-2 placeholder-gray-300 text-xl border-2 border-main bg-secondary text-main"
+        name={name}
       />
     </div>
   );
