@@ -7,7 +7,7 @@ export default function TransactionsList({
   transactions: Transaction[];
 }) {
   return transactions.map((transaction, index) => (
-    <div key={index} className="relative z-0">
+    <div key={index} className="relative z-0 mt-5">
       <div className="z-10 flex items-center justify-between h-20 p-4 border-2 border-main bg-secondary">
         <div className="border-main border-2 flex-none text-xl size-7 text-main text-center leading-none pt-[1px]">
           {sumCardQuantities(transaction)}
@@ -24,7 +24,9 @@ export default function TransactionsList({
           />
         </div>
       </div>
-      <div className="absolute w-full h-20 border-2 top-2 left-2 -z-10 bg-secondary border-main" />
+      {transaction.cards.length > 1 && (
+        <div className="absolute w-full h-20 border-2 top-2 left-2 -z-10 bg-secondary border-main" />
+      )}
     </div>
   ));
 }

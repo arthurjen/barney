@@ -5,7 +5,7 @@ import type { NextAuthConfig } from "next-auth";
 
 export const config = {
   theme: {
-    logo: "@/public/logo.svg",
+    logo: "./public/logo.svg",
   },
   providers: [Discord],
   callbacks: {

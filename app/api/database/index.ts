@@ -1,2 +1,4 @@
 export * from "./getPeople";
-export * from "./getTransactions";
+export * from "./getBorrowerTransactions";
+export * from "./getOwnerTransactions";
+export * from "./setTransaction";

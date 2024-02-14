@@ -3,29 +3,37 @@
 import { ChevronDownIcon, PlusIcon } from "@heroicons/react/24/solid";
 import { Modal, Select, Input, Button, IconButton } from "@/components/ui";
 import { useState } from "react";
-import setData from "@/firebase/firestore/setData";
-import Image from "next/image";
+import { setTransaction } from "@/app/api/database";
 import TransactionsList from "./transactions-list";
+import type { User } from "next-auth";
 
 const defaultCard: CardItem = {
   quantity: 1,
   name: "",
 };
 
-const numbers: SelectItem[] = [0, 1, 2, 3, 4].map((n) => ({
+const numbers: SelectItem<number>[] = [0, 1, 2, 3, 4].map((n) => ({
   value: n,
 }));
 
 export default function BorrowPage({
   people,
-  transactions,
+  ownerTransactions,
+  borrowerTransactions,
+  user,
 }: {
   people: People;
-  transactions: Transaction[];
+  ownerTransactions: Transaction[];
+  borrowerTransactions: Transaction[];
+  user: User | undefined;
 }) {
   const [isOpen, setIsOpen] = useState(false);
-  const [formData, setFormData] = useState({
-    owner: "",
+  const [submitting, setSubmitting] = useState(false);
+  const [formData, setFormData] = useState<{
+    owner: SelectItem<string>;
+    cards: CardItem[];
+  }>({
+    owner: { display: "", value: "" },
     cards: [{ ...defaultCard }],
   });
 
@@ -38,7 +46,7 @@ export default function BorrowPage({
     setFormData(toSet);
   }
 
-  function setOwner(owner: string) {
+  function setOwner(owner: SelectItem<string>) {
     const { cards } = formData;
     const toSet = {
       owner,
@@ -78,18 +86,19 @@ export default function BorrowPage({
 
   async function submitForm(e: React.SyntheticEvent) {
     e.preventDefault();
-    const data = {
-      name: "John snow",
-      house: "Stark",
+    setSubmitting(true);
+    const transaction: Transaction = {
+      owner: formData.owner.value,
+      cards: formData.cards,
+      borrower: "AAVUYtrb6RdHBdNnv5S2",
     };
-    const { result, error } = await setData("users", "user-id", data);
+    const id = await setTransaction(transaction);
 
-    if (error) {
-      return console.log(error);
-    } else console.log(result);
+    setSubmitting(false);
+    if (id) closeModal();
   }
 
-  const peopleData: SelectItem[] = Object.keys(people).map((id) => ({
+  const peopleData: SelectItem<string>[] = Object.keys(people).map((id) => ({
     value: id,
     display: people[id].name,
   }));
@@ -107,14 +116,14 @@ export default function BorrowPage({
             <div className="text-3xl text-main">cards borrowed</div>
             <ChevronDownIcon className="fill-main" width={24} height={24} />
           </div>
-          <TransactionsList transactions={transactions} />
+          <TransactionsList transactions={borrowerTransactions} />
         </div>
         <div>
           <div className="flex items-center justify-between w-full pb-2 mt-8 mb-4 border-b-4 border-main">
             <div className="text-3xl text-main">cards lent</div>
             <ChevronDownIcon className="fill-main" width={24} height={24} />
           </div>
-          <TransactionsList transactions={transactions} />
+          <TransactionsList transactions={ownerTransactions} />
         </div>
       </div>
       <div className="w-full mt-8">
@@ -160,7 +169,11 @@ export default function BorrowPage({
               <PlusIcon height={24} width={24} />
             </div>
           </div>
-          <Button text="submit" type="submit" disabled={submitDisabled} />
+          <Button
+            text="submit"
+            disabled={submitDisabled}
+            loading={submitting}
+          />
         </form>
       </Modal>
     </div>

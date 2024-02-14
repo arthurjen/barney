@@ -18,7 +18,7 @@ export function Navbar() {
   const pathname = usePathname();
 
   return (
-    <div className="fixed top-0 w-full max-w-screen-xl px-8 py-6 mx-auto z-500 bg-secondary">
+    <div className="fixed top-0 z-50 w-full max-w-screen-xl px-8 py-6 mx-auto bg-secondary">
       <nav className="relative flex items-center justify-between w-full mx-auto">
         <Logo />
         <div className="text-2xl text-main">

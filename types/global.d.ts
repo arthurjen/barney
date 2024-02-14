@@ -1,21 +1,15 @@
 export {};
 
-// type TypeGuard<T> = (val: unknown) => T;
-// const array = <T>(inner: TypeGuard<T>) => (val: unknown): T[] => {
-//   if (!Array.isArray(val)) throw new Error();
-//   return val.map(inner);
-// }
-
 declare global {
   interface Res {
     result: {
-      [id:string]: any
+      [id: string]: any;
     };
     error: unknown;
   }
 
-  interface SelectItem {
-    value: string | number;
+  interface SelectItem<T> {
+    value: T;
     display?: string;
   }
 
@@ -38,5 +32,7 @@ declare global {
     borrower: string;
     owner: string;
     cards: CardItem[];
+    timestamp?: number;
+    returned?: number;
   }
 }
