@@ -25,10 +25,10 @@ export function Select({
 }) {
   return (
     <div className={className}>
-      {label && <div className="text-main text-xl mb-2">{label}</div>}
+      {label && <div className="mb-2 text-xl text-main">{label}</div>}
       <Listbox value={value} by="value" onChange={onSelect} name={name}>
         <div className="z-0">
-          <Listbox.Button className="w-full z-0 cursor-default bg-secondary text-main border-2 border-main py-2 pl-3 text-left text-xl flex justify-between items-center">
+          <Listbox.Button className="z-0 flex items-center justify-between w-full py-2 pl-3 text-xl text-left border-2 cursor-default bg-secondary text-main border-main">
             <span
               className={clsx(
                 "block truncate",
@@ -37,8 +37,8 @@ export function Select({
             >
               {value.display || value.value || placeholder}
             </span>
-            <span className="pointer-events-none inset-y-0 right-0 flex items-center pr-2">
-              <ChevronUpDownIcon className="h-5 w-5" aria-hidden="true" />
+            <span className="inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
+              <ChevronUpDownIcon className="w-5 h-5" aria-hidden="true" />
             </span>
           </Listbox.Button>
           <Transition
@@ -47,7 +47,7 @@ export function Select({
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <Listbox.Options className="absolute z-10 w-full bg-secondary text-main border-2 border-main mt-1 max-h-60 overflow-auto py-1 text-xl">
+            <Listbox.Options className="absolute z-10 w-full py-1 mt-1 overflow-auto text-xl border-2 bg-secondary text-main border-main max-h-60">
               {data.map((item, index) => (
                 <Listbox.Option
                   key={index}

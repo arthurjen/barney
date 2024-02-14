@@ -8,11 +8,11 @@ export default function TransactionsList({
 }) {
   return transactions.map((transaction, index) => (
     <div key={index} className="relative z-0">
-      <div className="z-10 border-main bg-secondary border-2 flex justify-between items-center p-4 h-20">
+      <div className="z-10 flex items-center justify-between h-20 p-4 border-2 border-main bg-secondary">
         <div className="border-main border-2 flex-none text-xl size-7 text-main text-center leading-none pt-[1px]">
           {sumCardQuantities(transaction)}
         </div>
-        <div className="text-main grow text-xl pl-4 truncate">
+        <div className="pl-4 text-xl truncate text-main grow">
           {truncateCardNames(transaction)}
         </div>
         <div className="flex-none">
@@ -24,7 +24,7 @@ export default function TransactionsList({
           />
         </div>
       </div>
-      <div className="absolute top-2 left-2 -z-10 bg-secondary border-main border-2 h-20 w-full" />
+      <div className="absolute w-full h-20 border-2 top-2 left-2 -z-10 bg-secondary border-main" />
     </div>
   ));
 }

@@ -55,9 +55,9 @@ export default function PeopleList({ people }: { people: People }) {
 
   return (
     <div className="w-full h-full">
-      <div className="flex flex-col justify-center border-b-4 border-main w-full">
-        <div className="text-center text-main text-3xl pb-4">members</div>
-        <div className="text-main flex justify-between w-full mb-4 border-2 border-main">
+      <div className="flex flex-col justify-center w-full border-b-4 border-main">
+        <div className="pb-4 text-3xl text-center text-main">members</div>
+        <div className="flex justify-between w-full mb-4 border-2 text-main border-main">
           {sortOptions.map(({ display, value }, index) => (
             <div
               key={value}
@@ -82,7 +82,7 @@ export default function PeopleList({ people }: { people: People }) {
           ({ name, karma, date }, index) => (
             <div
               key={index}
-              className="w-full flex justify-between items-center border-main border-2 my-4 p-4 text-xl text-main"
+              className="flex items-center justify-between w-full p-4 my-4 text-xl border-2 border-main text-main"
             >
               <div className="flex items-center">
                 <Image

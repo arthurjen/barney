@@ -5,7 +5,7 @@ export function Input({
   value,
   onChange,
   className,
-  name
+  name,
 }: {
   label?: string;
   value: string;
@@ -23,10 +23,10 @@ export function Input({
       <input
         type="text"
         placeholder="card name"
-        // <Listbox.Button className="relative w-full cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
+        // <Listbox.Button className="relative w-full py-2 pl-3 pr-10 text-left bg-white rounded-lg shadow-md cursor-default focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
         value={value}
         onChange={onChange}
-        className="w-full px-3 py-2 placeholder-gray-300 text-xl border-2 border-main bg-secondary text-main"
+        className="w-full px-3 py-2 text-xl placeholder-gray-300 border-2 border-main bg-secondary text-main"
         name={name}
       />
     </div>

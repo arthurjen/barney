@@ -11,30 +11,30 @@ export default function ProfileClient({ ...props }) {
   const karma = 44;
 
   return (
-    <div className="w-full h-auto flex flex-col justify-between items-center text-main">
+    <div className="flex flex-col items-center justify-between w-full h-auto text-main">
       <Image
         alt="profile pic"
-        className="rounded-full border-4 border-main"
+        className="border-4 rounded-full border-main"
         src="placeholder.svg"
         width={100}
         height={100}
       />
-      <div className="text-3xl mt-4">test test</div>
-      <div className="text-xl mt-2">est. {dateCreated}</div>
-      <div className="text-5xl mt-8 rounded-full border-main border-4 w-24 h-24 flex justify-center content-center p-4">
+      <div className="mt-4 text-3xl">test test</div>
+      <div className="mt-2 text-xl">est. {dateCreated}</div>
+      <div className="flex content-center justify-center w-24 h-24 p-4 mt-8 text-5xl border-4 rounded-full border-main">
         {karma}
       </div>
-      <div className="text-3xl mt-2">karma</div>
-      <div className="text-3xl mt-8 pb-2 w-full flex justify-between border-b-4 content-center border-main">
+      <div className="mt-2 text-3xl">karma</div>
+      <div className="flex content-center justify-between w-full pb-2 mt-8 text-3xl border-b-4 border-main">
         <div>borrowed</div>
         <div>{borrowed}</div>
       </div>
-      <div className="text-3xl mt-8 pb-2 w-full flex justify-between border-b-4 content-center border-main">
+      <div className="flex content-center justify-between w-full pb-2 mt-8 text-3xl border-b-4 border-main">
         <div>lent</div>
         <div>{lent}</div>
       </div>
 
-      <div className="py-8 w-full">
+      <div className="w-full py-8">
         <Button
           onClick={() => console.log("edit profile")}
           text="edit profile"

@@ -10,9 +10,7 @@ export function SignIn({ provider, ...props }: { provider?: string }) {
       }}
       className="w-full"
     >
-      <Button
-        text="continue with discord"
-      />
+      <Button text="continue with discord" />
     </form>
   );
 }

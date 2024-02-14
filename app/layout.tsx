@@ -25,9 +25,9 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <main className="flex min-h-screen flex-col items-center bg-secondary font-nuform">
+        <main className="flex flex-col items-center min-h-screen bg-secondary font-nuform">
           <Navbar />
-          <div className="px-8 w-full">{children}</div>
+          <div className="w-full px-8">{children}</div>
         </main>
       </body>
     </html>

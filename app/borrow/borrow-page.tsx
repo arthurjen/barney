@@ -100,18 +100,18 @@ export default function BorrowPage({
     !formData.owner;
 
   return (
-    <div className="h-auto w-full">
-      <div className="flex justify-center flex-col">
+    <div className="w-full h-auto">
+      <div className="flex flex-col justify-center">
         <div>
-          <div className="pb-2 border-b-4 border-main flex justify-between items-center w-full mb-4">
-            <div className="text-main text-3xl">cards borrowed</div>
+          <div className="flex items-center justify-between w-full pb-2 mb-4 border-b-4 border-main">
+            <div className="text-3xl text-main">cards borrowed</div>
             <ChevronDownIcon className="fill-main" width={24} height={24} />
           </div>
           <TransactionsList transactions={transactions} />
         </div>
         <div>
-          <div className="pb-2 border-b-4 border-main flex justify-between items-center w-full mt-8 mb-4">
-            <div className="text-main text-3xl">cards lent</div>
+          <div className="flex items-center justify-between w-full pb-2 mt-8 mb-4 border-b-4 border-main">
+            <div className="text-3xl text-main">cards lent</div>
             <ChevronDownIcon className="fill-main" width={24} height={24} />
           </div>
           <TransactionsList transactions={transactions} />
@@ -132,7 +132,7 @@ export default function BorrowPage({
               placeholder="member"
             />
           </div>
-          <div className="pb-16 border-b-4 border-main mb-4">
+          <div className="pb-16 mb-4 border-b-4 border-main">
             {formData.cards.map((card, index) => (
               <div
                 key={index}
@@ -141,7 +141,7 @@ export default function BorrowPage({
                 <Select
                   type="number"
                   data={numbers}
-                  className="relative min-w-16 mr-2"
+                  className="relative mr-2 min-w-16"
                   value={{ value: card.quantity }}
                   onSelect={(e) => setCardQuantity(index, e.value)}
                   name={`card-quantity-${index}`}
@@ -154,7 +154,7 @@ export default function BorrowPage({
               </div>
             ))}
             <div
-              className="border-2 border-main w-full h-12 text-main text-3xl flex justify-center items-center mt-2"
+              className="flex items-center justify-center w-full h-12 mt-2 text-3xl border-2 border-main text-main"
               onClick={addCard}
             >
               <PlusIcon height={24} width={24} />

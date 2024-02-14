@@ -18,10 +18,10 @@ export function Navbar() {
   const pathname = usePathname();
 
   return (
-    <div className="z-500 fixed top-0 bg-secondary max-w-screen-xl w-full py-6 px-8 mx-auto">
-      <nav className="w-full relative flex items-center justify-between mx-auto">
+    <div className="fixed top-0 w-full max-w-screen-xl px-8 py-6 mx-auto z-500 bg-secondary">
+      <nav className="relative flex items-center justify-between w-full mx-auto">
         <Logo />
-        <div className="text-main text-2xl">
+        <div className="text-2xl text-main">
           {pathname !== "/signin" && pathname.slice(1)}
         </div>
         <MobileMenu path={pathname} />
@@ -32,8 +32,8 @@ export function Navbar() {
 
 const Logo = () => {
   return (
-    <Link href="/" className="relative h-12 w-12">
-      <Image src="logo.svg" alt="logo" fill priority/>
+    <Link href="/" className="relative w-12 h-12">
+      <Image src="logo.svg" alt="logo" fill priority />
     </Link>
   );
 };
@@ -42,7 +42,7 @@ const Hamburger = ({ open }: { open: boolean }) => {
   return (
     <Menu.Button
       aria-label="Toggle Menu"
-      className="py-1 ml-auto text-main rounded-md"
+      className="py-1 ml-auto rounded-md text-main"
     >
       {open ? (
         <XMarkIcon width={36} height={36} />
@@ -71,7 +71,7 @@ function NextLink({
 
 const MobileMenu = ({ path }: { path: string }) => {
   return (
-    <Menu as="div" className="z-10 relative text-center text-main">
+    <Menu as="div" className="relative z-10 text-center text-main">
       {({ open }) => (
         <>
           <Hamburger open={open} />
@@ -89,7 +89,7 @@ const MobileMenu = ({ path }: { path: string }) => {
                 "z-10 w-full h-full fixed top-24 left-0 focus:outline-none bg-secondary shadow-lg"
               )}
             >
-              <div className="py-3 px-8">
+              <div className="px-8 py-3">
                 {navigation.map((item, index) => (
                   <Menu.Item
                     as={NextLink}

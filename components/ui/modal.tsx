@@ -30,7 +30,7 @@ export function Modal(props: {
           </Transition.Child>
 
           <div className="fixed inset-0 overflow-y-auto font-nuform">
-            <div className="flex min-h-full items-center justify-center p-4 text-center">
+            <div className="flex items-center justify-center min-h-full p-4 text-center">
               <Transition.Child
                 as={Fragment}
                 enter="ease-out duration-300"
@@ -40,10 +40,10 @@ export function Modal(props: {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <Dialog.Panel className="w-full h-fit-content max-w-md transform overflow-hidden bg-secondary border-main border-4 p-6 text-left align-middle shadow-xl transition-all">
+                <Dialog.Panel className="w-full max-w-md p-6 overflow-hidden text-left align-middle transition-all transform border-4 shadow-xl h-fit-content bg-secondary border-main">
                   <Dialog.Title
                     as="h3"
-                    className="text-3xl text-main border-b-4 border-main flex pb-4 justify-between"
+                    className="flex justify-between pb-4 text-3xl border-b-4 text-main border-main"
                   >
                     {title}
                     <IconButton onClick={closeModal}>
