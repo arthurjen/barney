@@ -3,6 +3,9 @@
 import { ChevronDownIcon, PlusIcon } from "@heroicons/react/24/solid";
 import { Modal, Select, Input, Button, IconButton } from "@/components/ui";
 import { useState } from "react";
+import setData from "@/firebase/firestore/setData";
+import Image from "next/image";
+import TransactionsList from "./transactions-list";
 
 const defaultCard: CardItem = {
   quantity: 1,
@@ -13,7 +16,13 @@ const numbers: SelectItem[] = [0, 1, 2, 3, 4].map((n) => ({
   value: n,
 }));
 
-export default function BorrowPage() {
+export default function BorrowPage({
+  people,
+  transactions,
+}: {
+  people: People;
+  transactions: Transaction[];
+}) {
   const [isOpen, setIsOpen] = useState(false);
   const [formData, setFormData] = useState({
     owner: "",
@@ -42,8 +51,8 @@ export default function BorrowPage() {
     const { owner, cards } = formData;
     const toSet = {
       owner,
-      cards: [...cards]
-    }
+      cards: [...cards],
+    };
     if (quantity === 0) toSet.cards.splice(index, 1);
     else toSet.cards[index].quantity = quantity;
     setFormData(toSet);
@@ -53,8 +62,8 @@ export default function BorrowPage() {
     const { owner, cards } = formData;
     const toSet = {
       owner,
-      cards: [...cards]
-    }
+      cards: [...cards],
+    };
     toSet.cards[index].name = name;
     setFormData(toSet);
   }
@@ -67,48 +76,53 @@ export default function BorrowPage() {
     setIsOpen(true);
   }
 
-  const people = [
-    { id: "123451", name: "Arthur Jen" },
-    { id: "123452", name: "Devon Straub" },
-    { id: "123453", name: "Jackson Knorr" },
-    { id: "123454", name: "Scott Montgomery" },
-    { id: "123455", name: "Sean Collins" },
-    { id: "123456", name: "Tom Huteson" },
-  ];
+  async function submitForm(e: React.SyntheticEvent) {
+    e.preventDefault();
+    const data = {
+      name: "John snow",
+      house: "Stark",
+    };
+    const { result, error } = await setData("users", "user-id", data);
 
-  const peopleData: SelectItem[] = people.map(({ id, name }) => ({
+    if (error) {
+      return console.log(error);
+    } else console.log(result);
+  }
+
+  const peopleData: SelectItem[] = Object.keys(people).map((id) => ({
     value: id,
-    display: name,
+    display: people[id].name,
   }));
 
   const submitDisabled =
-    !formData.cards.length || formData.cards.some((card) => !card.name) || !formData.owner;
+    !formData.cards.length ||
+    formData.cards.some((card) => !card.name) ||
+    !formData.owner;
 
   return (
     <div className="h-auto w-full">
       <div className="flex justify-center flex-col">
-        <div className="pb-2 border-b-4 border-main flex justify-between items-center w-full mb-8">
-          <div className="text-main text-3xl">cards borrowed</div>
-          <ChevronDownIcon className="fill-main" width={24} height={24} />
+        <div>
+          <div className="pb-2 border-b-4 border-main flex justify-between items-center w-full mb-4">
+            <div className="text-main text-3xl">cards borrowed</div>
+            <ChevronDownIcon className="fill-main" width={24} height={24} />
+          </div>
+          <TransactionsList transactions={transactions} />
         </div>
-        <div className="pb-2 border-b-4 border-main flex justify-between items-center w-full mb-8">
-          <div className="text-main text-3xl">cards lent</div>
-          <ChevronDownIcon className="fill-main" width={24} height={24} />
+        <div>
+          <div className="pb-2 border-b-4 border-main flex justify-between items-center w-full mt-8 mb-4">
+            <div className="text-main text-3xl">cards lent</div>
+            <ChevronDownIcon className="fill-main" width={24} height={24} />
+          </div>
+          <TransactionsList transactions={transactions} />
         </div>
       </div>
-      <div className="w-full ">
+      <div className="w-full mt-8">
         <Button onClick={openModal} text="borrow"></Button>
       </div>
 
       <Modal isOpen={isOpen} closeModal={closeModal} title="borrow cards">
-        <form
-          // onSubmit={(e) => {
-          //   e.preventDefault();
-          //   console.log(e);
-          // }}
-          method="POST"
-          action="https://localhost:3000"
-        >
+        <form onSubmit={submitForm}>
           <div className="relative">
             <Select
               data={peopleData}

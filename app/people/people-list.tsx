@@ -17,70 +17,7 @@ const sortOptions = [
   // },
 ];
 
-const people: Person[] = [
-  {
-    name: "Tom Huteson",
-    karma: 44,
-    date: 1704579809561,
-  },
-  {
-    name: "Arthur Jen",
-    karma: 23,
-    date: 1704519809561,
-  },
-  {
-    name: "Ryan Ward",
-    karma: 59,
-    date: 1704579800561,
-  },
-  {
-    name: "Sean Collins",
-    karma: 0,
-    date: 1704579800562,
-  },
-  {
-    name: "Tom Huteson",
-    karma: 44,
-    date: 1704579809561,
-  },
-  {
-    name: "Arthur Jen",
-    karma: 23,
-    date: 1704519809561,
-  },
-  {
-    name: "Ryan Ward",
-    karma: 59,
-    date: 1704579800561,
-  },
-  {
-    name: "Sean Collins",
-    karma: 0,
-    date: 1704579800562,
-  },
-  {
-    name: "Tom Huteson",
-    karma: 44,
-    date: 1704579809561,
-  },
-  {
-    name: "Arthur Jen",
-    karma: 23,
-    date: 1704519809561,
-  },
-  {
-    name: "Ryan Ward",
-    karma: 59,
-    date: 1704579800561,
-  },
-  {
-    name: "Sean Collins",
-    karma: 0,
-    date: 1704579800562,
-  },
-];
-
-export default function PeopleList() {
+export default function PeopleList({ people }: { people: People }) {
   const [sortBy, setSortBy] = useState("karma");
   const [asc, setAsc] = useState(false);
 
@@ -141,25 +78,27 @@ export default function PeopleList() {
         </div>
       </div>
       <div className="w-full h-full overflow-auto">
-        {sort(people, sortBy, asc).map(({ name, karma, date }, index) => (
-          <div
-            key={index}
-            className="w-full flex justify-between items-center border-main border-2 my-4 p-4 text-xl text-main"
-          >
-            <div className="flex items-center">
-              <Image
-                src="placeholder.svg"
-                alt="profile pic"
-                width={36}
-                height={36}
-              />
-              <div className="ml-2">{name.toLowerCase()}</div>
+        {sort(Object.values(people), sortBy, asc).map(
+          ({ name, karma, date }, index) => (
+            <div
+              key={index}
+              className="w-full flex justify-between items-center border-main border-2 my-4 p-4 text-xl text-main"
+            >
+              <div className="flex items-center">
+                <Image
+                  src="placeholder.svg"
+                  alt="profile pic"
+                  width={36}
+                  height={36}
+                />
+                <div className="ml-2">{name.toLowerCase()}</div>
+              </div>
+              <div className="border-2 border-main w-[36px] h-[36px] box-border rounded-full">
+                <div className="text-center align-top pt-[1px]">{karma}</div>
+              </div>
             </div>
-            <div className="border-2 border-main w-[36px] h-[36px] box-border rounded-full">
-              <div className="text-center align-top pt-[1px]">{karma}</div>
-            </div>
-          </div>
-        ))}
+          )
+        )}
       </div>
     </div>
   );
