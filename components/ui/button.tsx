@@ -1,5 +1,5 @@
 "use client";
-import Spinner from "./spinner";
+import { Spinner } from "./spinner";
 
 export function Button({
   onClick,

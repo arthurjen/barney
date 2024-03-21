@@ -13,6 +13,7 @@ export const metadata: Metadata = {
 
 export default async function Borrow() {
   const session = await auth();
+  // console.log(session);
   const people = await getPeople();
   const borrowerTransactions = await getBorrowerTransactions(
     "AAVUYtrb6RdHBdNnv5S2"

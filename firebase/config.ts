@@ -1,5 +1,4 @@
 import { initializeApp, getApps } from "firebase/app";
-import { getDatabase } from "firebase/database";
 
 const firebaseConfig = {
   // databaseURL: "https://barney-b2214-default-rtdb.firebaseio.com",

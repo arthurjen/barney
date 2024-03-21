@@ -3,26 +3,24 @@ import Image from "next/image";
 import { Button } from "@/components/ui";
 
 export default function ProfileClient({ ...props }) {
-  const { session } = props;
+  const { session, person } = props;
 
-  const dateCreated = getDateEst(1706120282152);
   const borrowed = 8;
   const lent = 16;
-  const karma = 44;
 
   return (
     <div className="flex flex-col items-center justify-between w-full h-auto text-main">
       <Image
         alt="profile pic"
         className="border-4 rounded-full border-main"
-        src="placeholder.svg"
+        src={person.image}
         width={100}
         height={100}
       />
-      <div className="mt-4 text-3xl">test test</div>
-      <div className="mt-2 text-xl">est. {dateCreated}</div>
+      <div className="mt-4 text-3xl">{person.name}</div>
+      <div className="mt-2 text-xl">est. {getDateEst(person.date)}</div>
       <div className="flex content-center justify-center w-24 h-24 p-4 mt-8 text-5xl border-4 rounded-full border-main">
-        {karma}
+        {person.karma}
       </div>
       <div className="mt-2 text-3xl">karma</div>
       <div className="flex content-center justify-between w-full pb-2 mt-8 text-3xl border-b-4 border-main">

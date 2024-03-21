@@ -19,9 +19,12 @@ declare global {
   }
 
   interface Person {
+    id?: string;
     name: string;
-    karma: number;
-    date: number;
+    email: string;
+    image: string;
+    karma?: number;
+    date?: number;
   }
 
   interface People {
