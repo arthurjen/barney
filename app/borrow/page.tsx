@@ -13,18 +13,17 @@ export const metadata: Metadata = {
 
 export default async function Borrow() {
   const session = await auth();
-  // console.log(session);
+  if (!session) return;
+  const { user } = session;
   const people = await getPeople();
-  const borrowerTransactions = await getBorrowerTransactions(
-    "AAVUYtrb6RdHBdNnv5S2"
-  );
-  const ownerTransactions = await getOwnerTransactions("AAVUYtrb6RdHBdNnv5S2");
+  const borrowerTransactions = await getBorrowerTransactions(user.id);
+  const ownerTransactions = await getOwnerTransactions(user.id);
   return (
     <BorrowPage
       people={people}
       borrowerTransactions={borrowerTransactions}
       ownerTransactions={ownerTransactions}
-      user={session?.user}
+      user={session.user}
     />
   );
 }

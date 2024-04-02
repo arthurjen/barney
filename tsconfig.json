@@ -21,8 +21,9 @@
     ],
     "paths": {
       "@/*": ["./*"],
-      "auth": ["./auth"],
-    }
+      "auth": ["./auth"]
+    },
+    "typeRoots": ["./types"]
   },
   "include": [
     "process.d.ts",

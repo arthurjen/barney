@@ -1,4 +1,5 @@
 export {};
+import type { User as _User } from "next-auth";
 
 declare global {
   interface Res {
@@ -35,7 +36,12 @@ declare global {
     borrower: string;
     owner: string;
     cards: CardItem[];
-    timestamp?: number;
+    timestamp: number;
     returned?: number;
   }
+  interface JoinedTransaction extends Transaction {
+    owner: Person,
+    borrower: Person,
+  }
+  interface User extends _User
 }

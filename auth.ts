@@ -1,7 +1,8 @@
 import NextAuth from "next-auth";
 
 import Discord from "next-auth/providers/discord";
-import type { NextAuthConfig, Profile, JWT, Account } from "next-auth";
+import type { NextAuthConfig, Profile, Account } from "next-auth";
+import { JWT } from "next-auth/jwt"
 
 import FirebaseApp from "./firebase/config";
 import {

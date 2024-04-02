@@ -25,7 +25,7 @@ export default function BorrowPage({
   people: People;
   ownerTransactions: Transaction[];
   borrowerTransactions: Transaction[];
-  user: User | undefined;
+  user: User;
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const [submitting, setSubmitting] = useState(false);
@@ -90,23 +90,37 @@ export default function BorrowPage({
     const transaction: Transaction = {
       owner: formData.owner.value,
       cards: formData.cards,
-      borrower: "AAVUYtrb6RdHBdNnv5S2",
+      borrower: user.id,
     };
     const id = await setTransaction(transaction);
 
     setSubmitting(false);
-    if (id) closeModal();
+    if (id) {
+      borrowerTransactions.unshift(transaction);
+      closeModal();
+    }
   }
 
-  const peopleData: SelectItem<string>[] = Object.keys(people).map((id) => ({
-    value: id,
-    display: people[id].name,
-  }));
+  const peopleData: SelectItem<string>[] = Object.keys(people)
+    .map((id) => ({
+      value: id,
+      display: people[id].name,
+    }))
+    .filter((item) => item.value !== user.id);
+
+  const joinedBorrowerTransactions = joinTransactionData(
+    borrowerTransactions,
+    people
+  );
+  const joinedOwnerTransactions = joinTransactionData(
+    ownerTransactions,
+    people
+  );
 
   const submitDisabled =
     !formData.cards.length ||
     formData.cards.some((card) => !card.name) ||
-    !formData.owner;
+    !formData.owner.value;
 
   return (
     <div className="w-full h-auto">
@@ -116,14 +130,20 @@ export default function BorrowPage({
             <div className="text-3xl text-main">cards borrowed</div>
             <ChevronDownIcon className="fill-main" width={24} height={24} />
           </div>
-          <TransactionsList transactions={borrowerTransactions} />
+          <TransactionsList
+            transactions={sortByTimestamp(joinedBorrowerTransactions)}
+            user={user}
+          />
         </div>
         <div>
           <div className="flex items-center justify-between w-full pb-2 mt-8 mb-4 border-b-4 border-main">
             <div className="text-3xl text-main">cards lent</div>
             <ChevronDownIcon className="fill-main" width={24} height={24} />
           </div>
-          <TransactionsList transactions={ownerTransactions} />
+          <TransactionsList
+            transactions={sortByTimestamp(joinedOwnerTransactions)}
+            user={user}
+          />
         </div>
       </div>
       <div className="w-full mt-8">
@@ -178,4 +198,19 @@ export default function BorrowPage({
       </Modal>
     </div>
   );
+}
+
+function sortByTimestamp(transactions: JoinedTransaction[]) {
+  return transactions.sort((a, b) => b.timestamp - a.timestamp);
+}
+
+function joinTransactionData(transactions: Transaction[], people: People): JoinedTransaction[] {
+  // { ...Transaction, borrower: Person, owner: Person }
+  return transactions.map((transaction) => {
+    return {
+      ...transaction,
+      owner: people[transaction.owner],
+      borrower: people[transaction.borrower],
+    };
+  });
 }
