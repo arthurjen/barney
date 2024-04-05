@@ -6,10 +6,15 @@ import { useState } from "react";
 import { setTransaction } from "@/app/api/database";
 import TransactionsList from "./transactions-list";
 import type { User } from "next-auth";
+import { Disclosure, Transition } from "@headlessui/react";
 
 const defaultCard: CardItem = {
   quantity: 1,
   name: "",
+};
+const defaultFormData = {
+  owner: { display: "", value: "" },
+  cards: [{ ...defaultCard }],
 };
 
 const numbers: SelectItem<number>[] = [0, 1, 2, 3, 4].map((n) => ({
@@ -32,10 +37,7 @@ export default function BorrowPage({
   const [formData, setFormData] = useState<{
     owner: SelectItem<string>;
     cards: CardItem[];
-  }>({
-    owner: { display: "", value: "" },
-    cards: [{ ...defaultCard }],
-  });
+  }>(defaultFormData);
 
   function addCard() {
     const { owner, cards } = formData;
@@ -77,11 +79,16 @@ export default function BorrowPage({
   }
 
   function closeModal() {
+    resetForm();
     setIsOpen(false);
   }
 
   function openModal() {
     setIsOpen(true);
+  }
+
+  function resetForm() {
+    setFormData(defaultFormData);
   }
 
   async function submitForm(e: React.SyntheticEvent) {
@@ -125,26 +132,18 @@ export default function BorrowPage({
   return (
     <div className="w-full h-auto">
       <div className="flex flex-col justify-center">
-        <div>
-          <div className="flex items-center justify-between w-full pb-2 mb-4 border-b-4 border-main">
-            <div className="text-3xl text-main">cards borrowed</div>
-            <ChevronDownIcon className="fill-main" width={24} height={24} />
-          </div>
-          <TransactionsList
-            transactions={sortByTimestamp(joinedBorrowerTransactions)}
-            user={user}
-          />
-        </div>
-        <div>
-          <div className="flex items-center justify-between w-full pb-2 mt-8 mb-4 border-b-4 border-main">
-            <div className="text-3xl text-main">cards lent</div>
-            <ChevronDownIcon className="fill-main" width={24} height={24} />
-          </div>
-          <TransactionsList
-            transactions={sortByTimestamp(joinedOwnerTransactions)}
-            user={user}
-          />
-        </div>
+        <TransactionsCollapse
+          title="cards borrowed"
+          transactions={sortByTimestamp(joinedBorrowerTransactions)}
+          user={user}
+        />
+        <div className="pt-6" />
+        <TransactionsCollapse
+          className="pt-6"
+          title="cards lent"
+          transactions={sortByTimestamp(joinedOwnerTransactions)}
+          user={user}
+        />
       </div>
       <div className="w-full mt-8">
         <Button onClick={openModal} text="borrow"></Button>
@@ -204,7 +203,10 @@ function sortByTimestamp(transactions: JoinedTransaction[]) {
   return transactions.sort((a, b) => b.timestamp - a.timestamp);
 }
 
-function joinTransactionData(transactions: Transaction[], people: People): JoinedTransaction[] {
+function joinTransactionData(
+  transactions: Transaction[],
+  people: People
+): JoinedTransaction[] {
   // { ...Transaction, borrower: Person, owner: Person }
   return transactions.map((transaction) => {
     return {
@@ -213,4 +215,47 @@ function joinTransactionData(transactions: Transaction[], people: People): Joine
       borrower: people[transaction.borrower],
     };
   });
+}
+
+function TransactionsCollapse({
+  className,
+  transactions,
+  title,
+  user,
+}: {
+  className?: string;
+  transactions: JoinedTransaction[];
+  title: string;
+  user: User;
+}) {
+  return (
+    <Disclosure>
+      {({ open }) => (
+        <>
+          <Disclosure.Button>
+            <div className="flex items-center justify-between w-full pb-2 mb-4 border-b-4 border-main">
+              <div className="text-3xl text-main">{title}</div>
+              <ChevronDownIcon
+                className={`fill-main ${open ? "rotate-180 transform" : ""}`}
+                width={24}
+                height={24}
+              />
+            </div>
+          </Disclosure.Button>
+          <Transition
+            show={open}
+            className="transition-all duration-300 overflow-hidden"
+            enterFrom="transform scale-95 opacity-0 max-h-0"
+            enterTo="transform scale-100 opacity-100 max-h-[1000px]"
+            leaveFrom="transform scale-100 opacity-100 max-h-[1000px]"
+            leaveTo="transform scale-95 opacity-0 max-h-0"
+          >
+            <Disclosure.Panel>
+              <TransactionsList transactions={transactions} user={user} />
+            </Disclosure.Panel>
+          </Transition>
+        </>
+      )}
+    </Disclosure>
+  );
 }

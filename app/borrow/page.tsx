@@ -21,8 +21,8 @@ export default async function Borrow() {
   return (
     <BorrowPage
       people={people}
-      borrowerTransactions={borrowerTransactions}
-      ownerTransactions={ownerTransactions}
+      borrowerTransactions={Object.values(borrowerTransactions)}
+      ownerTransactions={Object.values(ownerTransactions)}
       user={session.user}
     />
   );

@@ -20,6 +20,11 @@ export default function TransactionsList({
     setCurrentTransaction(transaction);
     setIsOpen(true);
   }
+
+  function returnTransaction(id: string) {
+    const index = transactions.findIndex(transaction => id === transaction.id)
+    transactions.splice(index, 1);
+  }
   return (
     <>
       {transactions.map((transaction, index) => (
@@ -51,6 +56,7 @@ export default function TransactionsList({
         closeModal={closeModal}
         transaction={currentTransaction}
         user={user}
+        returnTransaction={returnTransaction}
       />
     </>
   );
