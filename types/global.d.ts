@@ -24,8 +24,8 @@ declare global {
     name: string;
     email: string;
     image: string;
-    karma?: number;
-    date?: number;
+    karma: number;
+    date: number;
   }
 
   interface People {

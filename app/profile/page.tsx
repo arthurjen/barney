@@ -8,6 +8,9 @@ export const metadata: Metadata = {
 };
 export default async function Profile() {
   const session = await auth();
-  const person = await getPerson(session?.user?.id);
+  const id = session?.user.id;
+  if (!id) return;
+  
+  const person = await getPerson(id);
   return <ProfileClient session={session} person={person} />;
 }

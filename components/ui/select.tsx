@@ -15,7 +15,7 @@ export function Select({
   name,
 }: {
   label?: string;
-  data: SelectItem[];
+  data: SelectItem<any>[];
   className?: string;
   value?: any;
   onSelect: React.Dispatch<SetStateAction<any>>;
