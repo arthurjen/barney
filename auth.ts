@@ -22,6 +22,9 @@ export const config = {
   },
   callbacks: {
     async jwt({ token, account, profile }) {
+      console.log('token', token);
+      console.log('account', account);
+      console.log('profile', profile);
       if (token && account && profile) {
         try {
           let result = {};
