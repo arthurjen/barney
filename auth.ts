@@ -15,7 +15,6 @@ import {
 } from "firebase/firestore";
 
 export const config = {
-  // adapter: FirestoreAdapter(),
   providers: [Discord],
   session: {
     strategy: 'jwt',
@@ -26,17 +25,12 @@ export const config = {
         try {
           let result = {};
           const db = getFirestore(FirebaseApp);
-          console.log("db initiated")
           let docRef = doc(db, `users/${profile.id}`);
-          console.log("docref initiated")
           
           const docSnapshot = await getDoc(docRef);
-          console.log("docsnapshot retrieved")
           if (docSnapshot.exists()) {
             result = docSnapshot.data();
-            console.log("user", result);
           } else {
-            console.log("user first time sign in ");
             await setDoc(docRef, {
               id: profile.id,
               name: profile.global_name,
