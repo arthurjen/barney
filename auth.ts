@@ -22,16 +22,16 @@ export const config = {
   },
   callbacks: {
     async jwt({ token, account, profile }) {
-      console.log('token', token);
-      console.log('account', account);
-      console.log('profile', profile);
       if (token && account && profile) {
         try {
           let result = {};
           const db = getFirestore(FirebaseApp);
+          console.log("db initiated")
           let docRef = doc(db, `users/${profile.id}`);
-
+          console.log("docref initiated")
+          
           const docSnapshot = await getDoc(docRef);
+          console.log("docsnapshot retrieved")
           if (docSnapshot.exists()) {
             result = docSnapshot.data();
             console.log("user", result);
@@ -47,7 +47,7 @@ export const config = {
             });
           }
         } catch (error) {
-          console.error(error);
+          throw error;
         }
 
         token.id = profile.id;
