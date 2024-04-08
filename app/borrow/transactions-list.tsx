@@ -11,7 +11,8 @@ export default function TransactionsList({
   user: User;
 }) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [currentTransaction, setCurrentTransaction] = useState<JoinedTransaction | null>(null)
+  const [currentTransaction, setCurrentTransaction] =
+    useState<JoinedTransaction | null>(null);
   function closeModal() {
     setIsOpen(false);
   }
@@ -22,14 +23,20 @@ export default function TransactionsList({
   }
 
   function returnTransaction(id: string) {
-    const index = transactions.findIndex(transaction => id === transaction.id)
+    const index = transactions.findIndex(
+      (transaction) => id === transaction.id
+    );
     transactions.splice(index, 1);
   }
   return (
     <>
       {transactions.map((transaction, index) => (
-        <div key={index} onClick={() => openModal(transaction)} className="relative z-0 mt-5">
-          <div className="z-10 flex items-center justify-between h-20 p-4 border-2 border-main bg-secondary">
+        <div
+          key={index}
+          onClick={() => openModal(transaction)}
+          className="relative z-0 mt-5 w-[96%]"
+        >
+          <div className="z-10 flex items-center justify-between h-20 p-4 border-2 border-main bg-secondary mb-2">
             <div className="border-main border-2 flex-none text-xl size-7 text-main text-center leading-none pt-[1px]">
               {sumCardQuantities(transaction)}
             </div>

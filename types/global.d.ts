@@ -32,23 +32,28 @@ declare global {
     [id: string]: Person;
   }
 
-  interface Transaction {
-    id: string;
+  interface FormTransaction {
     borrower: string;
     owner: string;
     cards: CardItem[];
-    timestamp: number;
+    timestamp?: number;
     returned?: number;
   }
 
+  interface Transaction extends FormTransaction {
+    id: string;
+    timestamp: number;
+    returned: number;
+  }
+
   interface Transactions {
-    [id: string]: Transaction
+    [id: string]: Transaction;
   }
 
   interface JoinedTransaction extends Transaction {
-    owner: Person,
-    borrower: Person,
+    owner: Person;
+    borrower: Person;
   }
 
-  interface User extends _User
+  interface User extends _User {}
 }

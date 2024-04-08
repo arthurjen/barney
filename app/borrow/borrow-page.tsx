@@ -5,7 +5,7 @@ import { Modal, Select, Input, Button, IconButton } from "@/components/ui";
 import { useState } from "react";
 import { setTransaction } from "@/app/api/database";
 import TransactionsList from "./transactions-list";
-import type { User } from "next-auth";
+// import type { User } from "next-auth";
 import { Disclosure, Transition } from "@headlessui/react";
 
 const defaultCard: CardItem = {
@@ -93,17 +93,18 @@ export default function BorrowPage({
 
   async function submitForm(e: React.SyntheticEvent) {
     e.preventDefault();
+    if (!user.id) return;
     setSubmitting(true);
-    const transaction: Transaction = {
+    const transaction: FormTransaction = {
       owner: formData.owner.value,
       cards: formData.cards,
       borrower: user.id,
     };
-    const id = await setTransaction(transaction);
+    const _transaction = await setTransaction(transaction);
 
     setSubmitting(false);
-    if (id) {
-      borrowerTransactions.unshift(transaction);
+    if (_transaction) {
+      borrowerTransactions.unshift(_transaction);
       closeModal();
     }
   }
@@ -145,7 +146,7 @@ export default function BorrowPage({
           user={user}
         />
       </div>
-      <div className="w-full mt-8">
+      <div className="w-full my-8">
         <Button onClick={openModal} text="borrow"></Button>
       </div>
 
@@ -229,7 +230,7 @@ function TransactionsCollapse({
   user: User;
 }) {
   return (
-    <Disclosure>
+    <Disclosure defaultOpen>
       {({ open }) => (
         <>
           <Disclosure.Button>

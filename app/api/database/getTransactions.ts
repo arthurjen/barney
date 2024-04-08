@@ -1,9 +1,9 @@
 import queryData from "@/firebase/firestore/queryData";
 
-export async function getOwnerTransactions(userId: string): Promise<Transactions> {
+export async function getTransactions(userId: string, role: "owner" | "borrower"): Promise<Transactions> {
   const { result } = await queryData(
     "transactions",
-    ["owner", "==", userId],
+    [role, "==", userId],
     ["returned", "==", 0]
   );
 

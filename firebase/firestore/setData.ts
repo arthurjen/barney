@@ -4,7 +4,7 @@ import {
   collection,
   addDoc,
   doc,
-  setDoc
+  setDoc,
 } from "firebase/firestore";
 
 const db = getFirestore(FirebaseApp);
@@ -29,10 +29,9 @@ export default async function setData(_collection: string, data: any) {
     // const docRef = await addDoc(collection(db, _collection), data);
     const docRef = doc(collection(db, _collection));
     id = docRef.id;
-    await setDoc(docRef, {
-      id,
-      ...data,
-    });
+    const toSet = { id, ...data };
+    await setDoc(docRef, toSet);
+    return toSet;
   } catch (e) {
     error = e;
   }
