@@ -16,8 +16,9 @@ export default function TransactionModal({
   user: User;
   returnTransaction: (id: string) => void;
 }) {
-  if (!transaction) return;
   const [isUpdating, setIsUpdating] = useState(false);
+  
+  if (!transaction) return;
 
   async function returnCards(id: string) {
     setIsUpdating(true);
@@ -80,18 +81,6 @@ export default function TransactionModal({
         </div>
       )}
     </Modal>
-  );
-}
-
-function sumCardQuantities(transaction: Transaction) {
-  return transaction.cards.reduce((acc, { quantity }) => acc + quantity, 0);
-}
-
-function truncateCardNames(transaction: Transaction) {
-  return transaction.cards.reduce(
-    (acc, { name }) =>
-      acc ? `${acc}, ${name.toLowerCase()}` : name.toLowerCase(),
-    ""
   );
 }
 
