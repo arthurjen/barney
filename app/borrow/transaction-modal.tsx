@@ -1,6 +1,8 @@
 "use client";
 import Image from "next/image";
 import { Modal, Button } from "@/components/ui";
+import { TRANSACTIONS } from "@/app/api/database";
+import { useState } from "react";
 export default function TransactionModal({
   isOpen,
   closeModal,
@@ -15,10 +17,16 @@ export default function TransactionModal({
   returnTransaction: (id: string) => void;
 }) {
   if (!transaction) return;
-  function returnCards(id: string) {
+  const [isUpdating, setIsUpdating] = useState(false);
+
+  async function returnCards(id: string) {
+    setIsUpdating(true);
+    await TRANSACTIONS.update(id, { returned: Date.now() });
     returnTransaction(id);
+    setIsUpdating(false);
     closeModal();
   }
+
   const userIsOwner = user.id === transaction.owner.id;
   const title = userIsOwner ? "cards lent" : "cards borrowed";
 
@@ -26,16 +34,24 @@ export default function TransactionModal({
     <Modal isOpen={isOpen} closeModal={closeModal} title={title}>
       <div className="min-w-full text-main text-xl">
         <div>
-          <div>{userIsOwner ? 'borrower:' : 'owner:'}</div>
+          <div>{userIsOwner ? "borrower:" : "owner:"}</div>
           <div className="flex items-center py-2">
             <Image
               className="border-2 border-main w-[36px] h-[36px] box-border rounded-full mr-3"
-              src={userIsOwner ? transaction.borrower.image : transaction.owner.image}
+              src={
+                userIsOwner
+                  ? transaction.borrower.image
+                  : transaction.owner.image
+              }
               alt="owner profile pic"
               width={36}
               height={36}
             />
-            <div>{userIsOwner ? transaction.borrower.name.toLowerCase() : transaction.owner.name.toLowerCase()}</div>
+            <div>
+              {userIsOwner
+                ? transaction.borrower.name.toLowerCase()
+                : transaction.owner.name.toLowerCase()}
+            </div>
           </div>
         </div>
 
@@ -60,7 +76,7 @@ export default function TransactionModal({
       </div>
       {userIsOwner && !transaction.returned && (
         <div className="w-full pt-4 border-t-4 text-main border-main">
-          <Button onClick={() => returnCards(transaction.id)} text="returned" />
+          <Button onClick={() => returnCards(transaction.id)} text="returned" disabled={isUpdating} loading={isUpdating} />
         </div>
       )}
     </Modal>
