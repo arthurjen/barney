@@ -3,7 +3,6 @@ import NextAuth from "next-auth";
 import Discord from "next-auth/providers/discord";
 import type { NextAuthConfig, Session } from "next-auth";
 import { JWT } from "next-auth/jwt";
-import { PEOPLE } from "@/app/api/database";
 
 import FirebaseApp from "./firebase/config";
 import {

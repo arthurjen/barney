@@ -6,12 +6,13 @@ import { clsx } from "clsx";
 import { Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/solid";
 import { usePathname } from "next/navigation";
+import { logOut } from "./logOut"
 
 const navigation = [
   { title: "borrow", path: "/borrow" },
   { title: "people", path: "/people" },
   { title: "profile", path: "/profile" },
-  { title: "log out", path: "/logout" },
+  { title: "log out", path: "/signin" },
 ];
 
 export function Navbar() {
@@ -101,6 +102,9 @@ const MobileMenu = ({ path }: { path: string }) => {
                         : "border-2 border-main text-main"
                     )}
                     href={item.path}
+                    onClick={() => {
+                      if (item.title === "log out") logOut();
+                    }}
                   >
                     {item.title}
                   </Menu.Item>
