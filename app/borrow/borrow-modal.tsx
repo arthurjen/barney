@@ -1,7 +1,7 @@
 "use client";
 
 import { PlusIcon } from "@heroicons/react/24/solid";
-import { Modal, Select, Input, Button, IconButton } from "@/components/ui";
+import { Modal, Select, Input, Button } from "@/components/ui";
 import { useState } from "react";
 import { TRANSACTIONS } from "@/app/api/database";
 

@@ -24,7 +24,8 @@ declare global {
     name: string;
     email: string;
     image: string;
-    karma: number;
+    borrowedCount: number,
+    lentCount: number,
     date: number;
   }
 

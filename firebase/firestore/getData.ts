@@ -18,21 +18,21 @@ export default async function getDocument(
 
   let result: { [id: string]: any } = {};
   let error = null;
-  if (id) {
-    let docRef = doc(db, _collection, id);
+  try {
+    if (id) {
+      let docRef = doc(db, _collection, id);
 
-    try {
       const docSnapshot = await getDoc(docRef);
-      if (docSnapshot.exists()) result = docSnapshot.data();
-    } catch (e) {
-      error = e;
+      if (docSnapshot.exists()) result[id] = docSnapshot.data();
+    } else {
+      const querySnapshot = await getDocs(collection(db, _collection));
+      
+      querySnapshot.forEach((doc) => {
+        result[doc.id] = doc.data();
+      });
     }
-  } else {
-    const querySnapshot = await getDocs(collection(db, _collection));
-    result = {};
-    querySnapshot.forEach((doc) => {
-      result[doc.id] = doc.data();
-    });
+  } catch (e) {
+    error = e;
   }
 
   return { result, error };

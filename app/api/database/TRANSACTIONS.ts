@@ -1,7 +1,7 @@
 import queryData from "@/firebase/firestore/queryData";
 import setData from "@/firebase/firestore/setData";
 import updateData from "@/firebase/firestore/updateData";
-
+import { PEOPLE } from "./PEOPLE";
 export const TRANSACTIONS = {
   get: async (
     userId: string,
@@ -27,7 +27,21 @@ export const TRANSACTIONS = {
   },
   update: async (transactionId: string, data: any) => {
     const result = await updateData("transactions", transactionId, data);
-    console.log("update result", result);
     return result;
   },
+  return: async (transaction: JoinedTransaction) => {
+    const numberOfCards = sumCardQuantities(transaction);
+    const ownerId = transaction.owner.id!;
+    const borrowerId = transaction.borrower.id!;
+    const transactionId = transaction.id;
+    
+    await Promise.all([
+      TRANSACTIONS.update(transactionId, { returned: Date.now() }),
+      PEOPLE.update(ownerId, { lentCount: numberOfCards }),
+      PEOPLE.update(borrowerId, { borrowedCount: numberOfCards }),
+    ]);
+  },
 };
+function sumCardQuantities(transaction: JoinedTransaction) {
+  return transaction.cards.reduce((acc, { quantity }) => acc + quantity, 0);
+}

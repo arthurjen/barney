@@ -17,13 +17,13 @@ export default function TransactionModal({
   returnTransaction: (id: string) => void;
 }) {
   const [isUpdating, setIsUpdating] = useState(false);
-  
+
   if (!transaction) return;
 
-  async function returnCards(id: string) {
+  async function returnCards(transaction: JoinedTransaction) {
     setIsUpdating(true);
-    await TRANSACTIONS.update(id, { returned: Date.now() });
-    returnTransaction(id);
+    await TRANSACTIONS.return(transaction);
+    returnTransaction(transaction.id);
     setIsUpdating(false);
     closeModal();
   }
@@ -77,7 +77,12 @@ export default function TransactionModal({
       </div>
       {userIsOwner && !transaction.returned && (
         <div className="w-full pt-4 border-t-4 text-main border-main">
-          <Button onClick={() => returnCards(transaction.id)} text="returned" disabled={isUpdating} loading={isUpdating} />
+          <Button
+            onClick={() => returnCards(transaction)}
+            text="returned"
+            disabled={isUpdating}
+            loading={isUpdating}
+          />
         </div>
       )}
     </Modal>

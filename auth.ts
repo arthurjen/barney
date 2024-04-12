@@ -3,6 +3,7 @@ import NextAuth from "next-auth";
 import Discord from "next-auth/providers/discord";
 import type { NextAuthConfig, Session } from "next-auth";
 import { JWT } from "next-auth/jwt";
+import { PEOPLE } from "@/app/api/database";
 
 import FirebaseApp from "./firebase/config";
 import {
@@ -36,7 +37,8 @@ export const config = {
               name: profile.global_name,
               email: profile.email,
               image: profile.image_url,
-              karma: 0,
+              lentCount: 0,
+              borrowedeCount: 0,
               date: Date.now(),
             });
           }

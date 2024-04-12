@@ -1,12 +1,15 @@
 "use client";
 import Image from "next/image";
 import { Button } from "@/components/ui";
+import { Popover, Transition } from "@headlessui/react";
+import { InformationCircleIcon } from "@heroicons/react/24/solid";
+import { calculateKarma } from "@/app/utils";
 
-export default function ProfileClient({ ...props }) {
-  const { session, person } = props;
-
-  const borrowed = 8;
-  const lent = 16;
+export default function ProfileClient({ person }: { person: Person }) {
+  // const borrowed = 8;
+  // const lent = 16;
+  const karmaTooltipText =
+    "you get 2 points of karma for each card lent out, and 1 point per card borrowed (and returned)";
 
   return (
     <div className="flex flex-col items-center justify-between w-full h-auto text-main">
@@ -19,17 +22,36 @@ export default function ProfileClient({ ...props }) {
       />
       <div className="mt-4 text-3xl">{person.name}</div>
       <div className="mt-2 text-xl">est. {getDateEst(person.date)}</div>
-      <div className="flex content-center justify-center w-24 h-24 p-4 mt-8 text-5xl border-4 rounded-full border-main">
-        {person.karma}
+      <div className="flex content-center h-24 justify-center w-24 p-4 mt-8 text-5xl border-4 rounded-full border-main">
+        {calculateKarma(person)}
       </div>
-      <div className="mt-2 text-3xl">karma</div>
+      <div className="pt-2 flex items-center justify-center">
+        <div className="text-3xl pl-8 pr-2">karma</div>
+        <Popover className="mt-2">
+          <Popover.Button>
+            <InformationCircleIcon height={24} width={24} />
+          </Popover.Button>
+          <Transition
+            enter="transition duration-100 ease-out"
+            enterFrom="transform scale-95 opacity-0"
+            enterTo="transform scale-100 opacity-100"
+            leave="transition duration-75 ease-out"
+            leaveFrom="transform scale-100 opacity-100"
+            leaveTo="transform scale-95 opacity-0"
+          >
+            <Popover.Panel className="absolute z-10 w-36 border-2 border-main bg-secondary p-2 rounded">
+              <div className="">{karmaTooltipText}</div>
+            </Popover.Panel>
+          </Transition>
+        </Popover>
+      </div>
       <div className="flex content-center justify-between w-full pb-2 mt-8 text-3xl border-b-4 border-main">
         <div>borrowed</div>
-        <div>{borrowed}</div>
+        <div>{person.borrowedCount}</div>
       </div>
       <div className="flex content-center justify-between w-full pb-2 mt-8 text-3xl border-b-4 border-main">
         <div>lent</div>
-        <div>{lent}</div>
+        <div>{person.lentCount}</div>
       </div>
 
       <div className="w-full py-8">

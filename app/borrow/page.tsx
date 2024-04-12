@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import BorrowPage from "./borrow-page";
-import { getPeople, TRANSACTIONS } from "@/app/api/database";
+import { PEOPLE, TRANSACTIONS } from "@/app/api/database";
 import { auth } from "auth";
 
 export const metadata: Metadata = {
@@ -11,7 +11,7 @@ export default async function Borrow() {
   const session = await auth();
   if (!session) return;
   const { user } = session;
-  const people = await getPeople();
+  const people = await PEOPLE.get();
   const borrowerTransactions = await TRANSACTIONS.get(user.id, "borrower");
   const ownerTransactions = await TRANSACTIONS.get(user.id, "owner");
   return (

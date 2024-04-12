@@ -1,6 +1,7 @@
 "use client";
 import Image from "next/image";
 import { useState } from "react";
+import { calculateKarma } from "@/app/utils";
 
 const sortOptions = [
   {
@@ -46,9 +47,9 @@ export default function PeopleList({ people }: { people: People }) {
       }
     } else if (sortBy === "karma") {
       if (asc) {
-        return list.sort((a, b) => a[sortBy] - b[sortBy]);
+        return list.sort((a, b) => calculateKarma(a) - calculateKarma(b));
       } else {
-        return list.sort((a, b) => b[sortBy] - a[sortBy]);
+        return list.sort((a, b) => calculateKarma(b) - calculateKarma(a));
       }
     } else return list;
   }
@@ -79,7 +80,7 @@ export default function PeopleList({ people }: { people: People }) {
       </div>
       <div className="w-full h-full overflow-auto">
         {sort(Object.values(people), sortBy, asc).map(
-          ({ name, karma, date }, index) => (
+          (person, index) => (
             <div
               key={index}
               className="flex items-center justify-between w-full p-4 my-4 text-xl border-2 border-main text-main"
@@ -91,10 +92,10 @@ export default function PeopleList({ people }: { people: People }) {
                   width={36}
                   height={36}
                 />
-                <div className="ml-2">{name.toLowerCase()}</div>
+                <div className="ml-2">{person.name.toLowerCase()}</div>
               </div>
               <div className="border-2 border-main w-[36px] h-[36px] box-border rounded-full">
-                <div className="text-center align-top pt-[1px]">{karma}</div>
+                <div className="text-center align-top pt-[1px]">{calculateKarma(person)}</div>
               </div>
             </div>
           )
