@@ -87,7 +87,8 @@ export default function PeopleList({ people }: { people: People }) {
             >
               <div className="flex items-center">
                 <Image
-                  src="placeholder.svg"
+                  src={person.image}
+                  className="border-2 rounded-full border-main"
                   alt="profile pic"
                   width={36}
                   height={36}
