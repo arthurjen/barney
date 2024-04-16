@@ -38,7 +38,7 @@ export const config = {
               email: profile.email,
               image: profile.image_url,
               lentCount: 0,
-              borrowedeCount: 0,
+              borrowedCount: 0,
               date: Date.now(),
             });
           }
