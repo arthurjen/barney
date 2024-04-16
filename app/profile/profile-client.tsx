@@ -4,10 +4,20 @@ import { Button } from "@/components/ui";
 import { Popover, Transition } from "@headlessui/react";
 import { InformationCircleIcon } from "@heroicons/react/24/solid";
 import { calculateKarma } from "@/app/utils";
+import EditProfileModal from "./edit-profile-modal";
+import { useState } from "react";
 
 export default function ProfileClient({ person }: { person: Person }) {
-  // const borrowed = 8;
-  // const lent = 16;
+  const [isOpen, setIsOpen] = useState(false);
+  const [name, setName] = useState(person.name);
+  function closeModal() {
+    setIsOpen(false);
+  }
+
+  function openModal() {
+    setIsOpen(true);
+  }
+
   const karmaTooltipText =
     "you get 2 points of karma for each card lent out, and 1 point per card borrowed (and returned)";
 
@@ -20,7 +30,7 @@ export default function ProfileClient({ person }: { person: Person }) {
         width={100}
         height={100}
       />
-      <div className="mt-4 text-3xl">{person.name}</div>
+      <div className="mt-4 text-3xl">{name}</div>
       <div className="mt-2 text-xl">est. {getDateEst(person.date)}</div>
       <div className="flex content-center h-24 justify-center w-24 p-4 mt-8 text-5xl border-4 rounded-full border-main">
         {calculateKarma(person)}
@@ -56,10 +66,16 @@ export default function ProfileClient({ person }: { person: Person }) {
 
       <div className="w-full py-8">
         <Button
-          onClick={() => console.log("edit profile")}
+          onClick={openModal}
           text="edit profile"
         />
       </div>
+      <EditProfileModal 
+        isOpen={isOpen}
+        closeModal={closeModal}
+        user={person}
+        setName={setName}
+      />
     </div>
   );
 }

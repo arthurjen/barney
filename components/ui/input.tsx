@@ -15,11 +15,11 @@ export function Input({
 }) {
   return (
     <div className={`w-full ${className}`}>
-      {/* {label && (
-        <label className="block mb-2 text-sm text-gray-600 dark:text-gray-400">
+      {label && (
+        <label className="block mb-2 text-xl text-main dark:text-gray-400">
           {label}
         </label>
-      )} */}
+      )}
       <input
         type="text"
         placeholder="card name"
