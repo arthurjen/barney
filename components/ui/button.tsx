@@ -7,19 +7,30 @@ export function Button({
   disabled,
   type,
   loading,
+  outline,
 }: {
   onClick?: () => void;
   text: string;
   disabled?: boolean;
   type?: "button" | "reset" | "submit" | undefined;
   loading?: boolean;
+  outline?: boolean;
 }) {
-  return (
+  return outline ? (
     <button
       onClick={onClick}
       disabled={!!disabled}
       type={type}
-      className="flex items-center justify-center w-full h-20 text-3xl bg-main font-regular text-secondary disabled:bg-tertiary hover:bg-black/30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75"
+      className="flex items-center justify-center w-full h-20 text-3xl bg-secondary font-regular text-main disabled:opacity-60 border-main border-2"
+    >
+      {loading ? <Spinner /> : text}
+    </button>
+  ) : (
+    <button
+      onClick={onClick}
+      disabled={!!disabled}
+      type={type}
+      className="flex items-center justify-center w-full h-20 text-3xl bg-main font-regular text-secondary disabled:bg-tertiary"
     >
       {loading ? <Spinner /> : text}
     </button>

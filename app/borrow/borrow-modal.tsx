@@ -185,6 +185,7 @@ export default function BorrowModal({
         <Button
           type="submit"
           text="submit"
+          outline={submitDisabled}
           disabled={submitDisabled}
           loading={submitting}
         />
