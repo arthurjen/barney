@@ -23,7 +23,7 @@ const config: Config = {
       colors: {
         main: "#FDBE14", // yellow
         secondary: "#7F14B1", // purple
-        tertiary: "#D32037" // red
+        tertiary: "#AA8731", // dark yellow
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
