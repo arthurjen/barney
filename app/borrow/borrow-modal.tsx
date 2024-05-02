@@ -4,7 +4,6 @@ import Image from "next/image";
 import { Modal, Select, Input, Button, IconButton } from "@/components/ui";
 import { useState } from "react";
 import { TRANSACTIONS } from "@/app/api/database";
-import { ClipboardDocumentListIcon } from "@heroicons/react/24/outline";
 import { parseDecklist } from "../utils/parseDecklist";
 const defaultCard: CardItem = {
   quantity: 1,
@@ -171,13 +170,21 @@ export default function BorrowModal({
               />
             </div>
             <div
-              className="flex items-center justify-center min-w-12 h-12 mt-2 text-3xl border-2 border-main text-main"
+              className="flex items-center justify-center min-w-20 h-12 mt-2 text-3xl border-2 border-main text-main"
               onClick={pasteFromClipboard}
             >
-              <ClipboardDocumentListIcon
-                className="stroke-main"
-                height={18}
+              <Image
+                alt="plus icon"
+                className="mr-3"
+                src="icons/plus.svg"
                 width={18}
+                height={18}
+              />
+              <Image
+                alt="clipboard icon"
+                src="icons/clipboard.svg"
+                width={18}
+                height={18}
               />
             </div>
           </div>
