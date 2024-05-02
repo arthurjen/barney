@@ -43,14 +43,16 @@ const Hamburger = ({ open }: { open: boolean }) => {
     >
       {open ? (
         <Image
-          className="mr-[2px]"
+          priority
+          className="mr-[3px]"
           alt="x mark icon"
           src="icons/x-mark.svg"
-          width={30}
-          height={30}
+          width={36}
+          height={36}
         />
       ) : (
         <Image
+          priority
           alt="hamburger icon"
           src="icons/3bar.svg"
           width={36}
