@@ -26,7 +26,7 @@ export function Input({
         // <Listbox.Button className="relative w-full py-2 pl-3 pr-10 text-left bg-white rounded-lg shadow-md cursor-default focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
         value={value}
         onChange={onChange}
-        className="w-full px-3 py-2 text-xl placeholder-gray-300 border-2 border-main bg-secondary text-main"
+        className="rounded-none w-full px-3 py-2 text-xl placeholder-main placeholder-opacity-60 border-2 border-main bg-secondary text-main"
         name={name}
       />
     </div>

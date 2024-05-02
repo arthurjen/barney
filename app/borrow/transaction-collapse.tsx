@@ -1,8 +1,8 @@
 "use client";
 
-import { ChevronDownIcon, PlusIcon } from "@heroicons/react/24/solid";
 import TransactionsList from "./transactions-list";
 import { Disclosure, Transition } from "@headlessui/react";
+import Image from "next/image";
 
 export default function TransactionsCollapse({
   transactions,
@@ -18,10 +18,12 @@ export default function TransactionsCollapse({
       {({ open }) => (
         <>
           <Disclosure.Button>
-            <div className="flex items-center justify-between w-full pb-2 mb-4 border-b-4 border-main">
+            <div className="flex items-center justify-between w-full pb-2 border-b-4 border-main">
               <div className="text-3xl text-main">{title}</div>
-              <ChevronDownIcon
+              <Image
                 className={`fill-main ${open ? "rotate-180 transform" : ""}`}
+                alt="hamburger icon"
+                src="icons/chevron-down.svg"
                 width={24}
                 height={24}
               />

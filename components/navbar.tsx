@@ -4,9 +4,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { clsx } from "clsx";
 import { Menu, Transition } from "@headlessui/react";
-import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/solid";
 import { usePathname } from "next/navigation";
-import { logOut } from "./logOut"
+import { logOut } from "./logOut";
 
 const navigation = [
   { title: "borrow", path: "/borrow" },
@@ -19,12 +18,9 @@ export function Navbar() {
   const pathname = usePathname();
 
   return (
-    <div className="fixed top-0 z-50 w-full max-w-screen-xl px-8 py-6 mx-auto bg-secondary">
+    <div className="fixed top-0 z-10 w-full max-w-screen-xl px-8 py-6 mx-auto bg-secondary">
       <nav className="relative flex items-center justify-between w-full mx-auto">
         <Logo />
-        <div className="text-2xl text-main">
-          {pathname !== "/signin" && pathname.slice(1)}
-        </div>
         <MobileMenu path={pathname} />
       </nav>
     </div>
@@ -46,9 +42,20 @@ const Hamburger = ({ open }: { open: boolean }) => {
       className="py-1 ml-auto rounded-md text-main"
     >
       {open ? (
-        <XMarkIcon width={36} height={36} />
+        <Image
+          className="mr-[2px]"
+          alt="x mark icon"
+          src="icons/x-mark.svg"
+          width={30}
+          height={30}
+        />
       ) : (
-        <Bars3Icon width={36} height={36} />
+        <Image
+          alt="hamburger icon"
+          src="icons/3bar.svg"
+          width={36}
+          height={36}
+        />
       )}
     </Menu.Button>
   );

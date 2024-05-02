@@ -4,6 +4,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import { Fragment } from "react";
 import { XMarkIcon } from "@heroicons/react/24/solid";
 import { IconButton } from "@/components/ui";
+import Image from "next/image";
 
 export function Modal(props: {
   isOpen: boolean;
@@ -47,7 +48,12 @@ export function Modal(props: {
                   >
                     {title}
                     <IconButton onClick={closeModal}>
-                      <XMarkIcon height={36} width={36} />
+                      <Image
+                        alt="x mark icon"
+                        src="icons/x-mark-small.svg"
+                        width={19.8}
+                        height={19.8}
+                      />
                     </IconButton>
                   </Dialog.Title>
                   <div className="mt-2">{children}</div>

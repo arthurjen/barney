@@ -34,7 +34,7 @@ export default function TransactionsList({
         <div
           key={index}
           onClick={() => openModal(transaction)}
-          className="relative z-0 mt-5 w-[96%]"
+          className="relative z-0 mt-5"
         >
           <div className="z-10 flex items-center justify-between h-20 p-4 border-2 border-main bg-secondary mb-2">
             <div className="border-main border-2 flex-none text-xl size-7 text-main text-center leading-none pt-[1px]">
