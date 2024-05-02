@@ -23,6 +23,7 @@ export function Select({
   type?: string;
   name?: string;
 }) {
+  console.log("value", value);
   return (
     <div className={className}>
       {label && <div className="mb-2 text-xl text-main">{label}</div>}
@@ -30,10 +31,9 @@ export function Select({
         <div className="z-0">
           <Listbox.Button className="z-0 flex items-center justify-between w-full py-2 pl-3 text-xl text-left border-2 cursor-default bg-secondary text-main border-main">
             <span
-              className={clsx(
-                "block truncate",
-                !value && placeholder && "text-gray-300"
-              )}
+              className={`block truncate ${
+                !value.value && placeholder ? "opacity-60" : ""
+              }`}
             >
               {value.display || value.value || placeholder}
             </span>

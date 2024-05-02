@@ -44,7 +44,7 @@ export function Modal(props: {
                 <Dialog.Panel className="w-full max-w-md p-6 overflow-hidden text-left align-middle transition-all transform border-4 shadow-xl h-fit-content bg-secondary border-main">
                   <Dialog.Title
                     as="h3"
-                    className="flex justify-between pb-4 text-3xl border-b-4 text-main border-main"
+                    className="flex align-text-top leading-7 justify-between min-h-8 pb-[0.7rem] text-3xl border-b-4 text-main border-main"
                   >
                     {title}
                     <IconButton onClick={closeModal}>
