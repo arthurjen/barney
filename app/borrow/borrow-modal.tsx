@@ -83,16 +83,16 @@ export default function BorrowModal({
 
   async function pasteFromClipboard() {
     const text = await navigator.clipboard.readText();
-    const list: CardItem[] = parseDecklist(text).map(card => ({
+    const list: CardItem[] = parseDecklist(text).map((card) => ({
       quantity: card[0] as number,
       name: card[1] as string,
     }));
     if (!list.length) return;
-    
+
     const { owner, cards } = formData;
     const toSet = {
       owner,
-      cards: [...cards.filter(card => !!card.name), ...list],
+      cards: [...cards.filter((card) => !!card.name), ...list],
     };
     setFormData(toSet);
   }
@@ -185,7 +185,7 @@ export default function BorrowModal({
         <Button
           type="submit"
           text="submit"
-          outline={submitDisabled}
+          // outline={submitDisabled}
           disabled={submitDisabled}
           loading={submitting}
         />

@@ -51,7 +51,7 @@ export default function BorrowPage({
           user={user}
         />
       </div>
-      <div className="w-full my-8">
+      <div className="w-full my-8 px-[1rem]">
         <Button onClick={openModal} text="borrow"></Button>
       </div>
 
