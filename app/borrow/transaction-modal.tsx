@@ -64,19 +64,19 @@ export default function TransactionModal({
                 <div className="border-main border-2 flex-none text-xl size-7 text-main text-center leading-none pt-[1px] mr-3">
                   {card.quantity}
                 </div>
-                <div>{card.name.toLowerCase()}</div>
+                <div className="truncate">{card.name.toLowerCase()}</div>
               </div>
             ))}
           </div>
         </div>
 
-        <div className="flex justify-between pb-6">
+        <div className="flex justify-between">
           <div>when:</div>
           <div className="">{parseTimestamp(transaction.timestamp)}</div>
         </div>
       </div>
       {userIsOwner && !transaction.returned && (
-        <div className="w-full pt-4 border-t-4 text-main border-main">
+        <div className="w-full pt-6 mt-6 border-t-4 text-main border-main">
           <Button
             onClick={() => returnCards(transaction)}
             text="returned"

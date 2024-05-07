@@ -23,7 +23,6 @@ export function Select({
   type?: string;
   name?: string;
 }) {
-  console.log("value", value);
   return (
     <div className={className}>
       {label && <div className="mb-2 text-xl text-main">{label}</div>}

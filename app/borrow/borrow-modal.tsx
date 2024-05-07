@@ -139,7 +139,7 @@ export default function BorrowModal({
             placeholder="member"
           />
         </div>
-        <div className="pb-16 mb-4 border-b-4 border-main">
+        <div className="pb-16 mb-6 border-b-4 border-main">
           {formData.cards.map((card, index) => (
             <div key={index} className="flex justify-between w-full mx-0 mt-2">
               <Select
@@ -170,16 +170,9 @@ export default function BorrowModal({
               />
             </div>
             <div
-              className="flex items-center justify-center min-w-20 h-12 mt-2 text-3xl border-2 border-main text-main"
+              className="flex items-center justify-center min-w-16 h-12 mt-2 text-3xl border-2 border-main text-main"
               onClick={pasteFromClipboard}
             >
-              <Image
-                alt="plus icon"
-                className="mr-3"
-                src="icons/plus.svg"
-                width={18}
-                height={18}
-              />
               <Image
                 alt="clipboard icon"
                 src="icons/clipboard.svg"

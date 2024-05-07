@@ -30,7 +30,6 @@ export const config = {
           const docSnapshot = await getDoc(docRef);
           if (docSnapshot.exists()) {
             result = docSnapshot.data();
-            console.log('user exists', result);
           } else {
             await setDoc(docRef, {
               id: profile.id,

@@ -50,9 +50,16 @@ export default function EditProfileModal({
           value={formData.name}
           onChange={(e) => updatePerson(e.target.value)}
           name="name"
-          className="my-4"
+          className="mb-4 mt-2"
         />
-        <Button text="submit" disabled={submitDisabled} loading={submitting} />
+        <div className="pt-6 mt-6 border-t-4 border-main">
+          <Button
+            text="submit"
+            disabled={submitDisabled}
+            outline={submitDisabled}
+            loading={submitting}
+          />
+        </div>
       </form>
     </Modal>
   );

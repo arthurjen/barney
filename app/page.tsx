@@ -8,7 +8,6 @@ export const metadata: Metadata = {
 
 export default async function Home() {
   const session = await auth();
-  // console.log(session?.user);
   if (!session?.user) redirect("/signin");
   else redirect("/borrow");
 }
