@@ -1,4 +1,3 @@
-import queryData from "@/firebase/firestore/queryData";
 import setData from "@/firebase/firestore/setData";
 import updateData from "@/firebase/firestore/updateData";
 import getData from "@/firebase/firestore/getData";

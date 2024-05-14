@@ -1,7 +1,7 @@
 import NextAuth from "next-auth";
 
 import Discord from "next-auth/providers/discord";
-import type { NextAuthConfig, Session } from "next-auth";
+import type { NextAuthConfig, Session as _Session } from "next-auth";
 import { JWT } from "next-auth/jwt";
 
 import FirebaseApp from "./firebase/config";
@@ -15,9 +15,14 @@ import {
 } from "firebase/firestore";
 
 export const config = {
-  providers: [Discord],
+  providers: [
+    Discord({
+      authorization:
+        "https://discord.com/api/oauth2/authorize?scope=identify+email+guilds+guilds.members.read",
+    }),
+  ],
   session: {
-    strategy: 'jwt',
+    strategy: "jwt",
   },
   callbacks: {
     async jwt({ token, account, profile }) {
@@ -26,7 +31,7 @@ export const config = {
           let result = {};
           const db = getFirestore(FirebaseApp);
           let docRef = doc(db, `users/${profile.id}`);
-          
+
           const docSnapshot = await getDoc(docRef);
           if (docSnapshot.exists()) {
             result = docSnapshot.data();
@@ -46,15 +51,19 @@ export const config = {
         }
 
         token.id = profile.id;
+        token.accessToken = account.access_token;
       }
       return token;
     },
-    async session({ session, token }: { session: Session, token?: JWT }) {
-      if (token && token.id) {
-        session.user.id = token.id as string;
-      }
+    async session({ session, token }: { session: _Session; token?: JWT }): Promise<Session> {
+      const sessionWithToken = Object.assign({}, session) as Session;
 
-      return session;
+      if (token && token.id) {
+        sessionWithToken.user.id = token.id as string;
+        sessionWithToken.accessToken = token.accessToken as string;
+      }
+      
+      return sessionWithToken;
     },
     authorized({ request, auth }) {
       const { pathname } = request.nextUrl;

@@ -1,7 +1,8 @@
 export {};
-import type { User as _User } from "next-auth";
+import type { User as _User, Session as _Session } from "next-auth";
 
 declare global {
+
   interface Res {
     result: {
       [id: string]: any;
@@ -57,4 +58,8 @@ declare global {
   }
 
   interface User extends _User {}
+
+  interface Session extends _Session {
+    accessToken: string;
+  }
 }

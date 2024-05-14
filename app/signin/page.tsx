@@ -2,6 +2,7 @@ import Image from "next/image";
 import { SignIn } from "@/components/auth-components";
 
 export default function SignInPage() {
+  // https://discord.com/oauth2/authorize?scope=identify+email+guilds+guilds.members.read&response_type=code&client_id=1189651115348865167&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fapi%2Fauth%2Fcallback%2Fdiscord&code_challenge=IJwXnbBZh13H7N6v21VCCiyuprNc-7Bp58llmsXWbIk&code_challenge_method=S256
   return (
     <div>
       <div className="flex flex-col items-center justify-center w-full h-screen text-main">
